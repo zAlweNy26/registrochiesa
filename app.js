@@ -3,6 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const logger = require('morgan')
+const crypto = require('crypto')
 const sassMiddleware = require('node-sass-middleware')
 
 const indexRouter = require('./routes/index')
@@ -13,10 +14,12 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+var genSecret = crypto.createHash("sha256").update("registrogrest").digest("hex")
+
 app.use(logger('dev'))
 app.use(session({
-  //genid: (req) => { return genuuid() },
-	secret: 'registrogrest', // da cambiare, generandolo periodicamente e con stringa alfanumerica
+  genid: (req) => { return genSecret },
+	secret: genSecret, // assicurarsi che si generi periodicamente
 	resave: false,
 	saveUninitialized: true,
   cookie: { secure: 'auto' }
