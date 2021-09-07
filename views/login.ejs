@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./head'); %>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title-text">Accedi al registro</div>
+        <div class="form-container">
+          <form class="login" method="post" action="/login">
+            <div class="field">
+              <input type="text" name="nickname" placeholder="Nome utente..." required>
+            </div>
+            <div class="field">
+              <input type="password" name="password" placeholder="Password..." required>
+            </div>
+            <!--<div class="pass-link">
+              <a href="#">Password dimenticata ?</a>
+            </div>-->
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Accedi">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include('./footer'); %>
+  </body>
+</html>
