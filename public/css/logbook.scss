@@ -8,6 +8,14 @@
     box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
 }
 
+.icon-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    i { color: $dark; }
+}
+
 #mainbar {
     width: 100%;
     border-top-right-radius: 20px;
@@ -19,17 +27,7 @@
     background-image: linear-gradient(to right, $secondary, $primary);
     background-attachment: fixed;
 
-    #grest {
-        text-align: center;
-    }
-
-    .icon-btn {
-        border: none;
-        background: none;
-        cursor: pointer;
-
-        i { color: $dark; }
-    }
+    #grest { text-align: center; }
 }
 
 .tables {
