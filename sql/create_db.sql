@@ -30,7 +30,7 @@ CREATE TABLE squadre (
 CREATE TABLE staff_grest (
 	SGID INT NOT NULL, 
 	Nickname CHAR(20) NOT NULL,
-	Password CHAR(255) NOT NULL,
+	Password CHAR(64) NOT NULL,
 	PRIMARY KEY (SGID, Nickname), 
 	FOREIGN KEY (SGID)
 		REFERENCES persone(PID) 
@@ -53,9 +53,9 @@ CREATE TABLE animatori (
 );
 
 CREATE TABLE bimbi (
-	BID INT,
-    Squadra INT ,
-	Accompagnatore CHAR(50) NOT NULL,
+	BID INT NOT NULL,
+    Squadra INT NOT NULL,
+	Accompagnatore CHAR(60) NOT NULL,
 	PRIMARY KEY (BID),
     FOREIGN KEY (BID)
 		REFERENCES persone(PID) 
@@ -70,18 +70,18 @@ CREATE TABLE bimbi (
 CREATE TABLE programma (
 	PID INT NOT NULL,
 	DataP DATE NOT NULL,
-	Descrizione VARCHAR(400) NOT NULL,
+	Descrizione TEXT,
 	Organizzatore CHAR(50) NOT NULL,
 	PRIMARY KEY (PID)
 );
 
 CREATE TABLE giorni (
-	DataG TIME,
+	Data TIME NOT NULL,
 	GID INT NOT NULL,
 	Temperatura INT,
 	Assente BIT NOT NULL,
-	MotivoAssenza VARCHAR(400),
-	PRIMARY KEY (DataG), 
+	MotivoAssenza TEXT,
+	PRIMARY KEY (Data), 
     FOREIGN KEY (GID)
 		REFERENCES persone(PID) 
 		ON DELETE CASCADE

@@ -10,4 +10,4 @@
     - 'npm install'
 ## Cose da fare :
     - Fare controllo della password con lo SHA256
-    - Far funzionare switch del tema con il bottone
+    - Fare switch del tema con il bottone

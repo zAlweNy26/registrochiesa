@@ -27,7 +27,10 @@
     background-image: linear-gradient(to right, $secondary, $primary);
     background-attachment: fixed;
 
-    #grest { text-align: center; }
+    #grest { 
+        display: flex;
+        align-items: center;
+    }
 }
 
 .tables {
@@ -41,6 +44,7 @@ select {
     border: none;
     color: $dark;
     font-weight: bold;
+    font-size: 1.5em;
     outline: none;
     cursor: pointer;
 }
