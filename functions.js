@@ -7,11 +7,13 @@ const connection = mysql.createConnection({
 	database : 'registrogrest'
 });
 
-doQuery = function (query, values) {
+doQuery = function (query, values = '') {
     return new Promise((resolve, reject) => {
         connection.query(query, values, (err, res, fields) => {
-            if (res.length > 0) return resolve(res[0])
-            else return reject(err)
+            if (err) return reject(err)
+            if (res.length == 1) return resolve(res[0])
+            else if (res.length > 0) return resolve(res)
+            else return reject(0)
         })
     })
 }

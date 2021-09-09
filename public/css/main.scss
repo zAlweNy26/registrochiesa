@@ -38,6 +38,7 @@ footer {
     width: 100%;
     justify-content: space-around;
     padding: 20px;
+    flex-wrap: wrap;
     align-items: flex-end;
 
     .dev {
@@ -48,6 +49,19 @@ footer {
         border-radius: 10px;
         height: 56px;
         margin-right: 10px;
+    }
+
+    #copyright { text-align: end; }
+}
+
+.icon-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    i { 
+        color: $dark; 
+        font-size: $normal-icon;
     }
 }
 
@@ -67,4 +81,8 @@ footer {
     &:hover {
         background: rgba(0, 0, 0, 0.45);
     }
+}
+
+@media screen and (max-width: 767px) {
+    #logos { margin: 20px; }
 }

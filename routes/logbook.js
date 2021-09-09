@@ -4,6 +4,19 @@ const { doQuery } = require('../functions')
 
 router.get('/', async (req, res, next) => {
   if (req.session.logged) {
+    let grestYears = ''
+    await doQuery('SELECT Anno FROM squadre').then(rs => {
+      let curYear = new Date().getFullYear()
+      let years = []
+      if (rs.length == null) {
+        years.push(rs.Anno)
+        if (rs.Anno != curYear) years.push(curYear)
+      } else {
+        years = [...new Set(rs.map(item => item.Anno))]
+        if (!years.find(item => item == curYear)) years.push(curYear)
+      }
+      years.sort((a, b) => { return a - b; }).forEach(item => grestYears += `<option ${item == curYear ? 'selected' : ''} value="${item}">${item}</option>`)
+    }).catch(err => res.send(err))
     await doQuery('SELECT Nome, Cognome FROM persone P WHERE P.PID = ?', [req.session.sgid]).then(rs => {
       req.session.name = rs.Nome
       req.session.surname = rs.Cognome
@@ -14,7 +27,8 @@ router.get('/', async (req, res, next) => {
     res.render('logbook', {
       name: req.session.name,
       surname: req.session.surname,
-      team: req.session.team
+      team: req.session.team,
+      years: grestYears
     })
   } else res.redirect('/login');
 })

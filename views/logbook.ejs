@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="wrapper">
+            <div class="wrapper lightTheme">
                 <div id="mainbar">
                     <div id="profile">
                         <h3><%= name %> <%= surname %></h3>
@@ -16,16 +16,13 @@
                         <h2>Grest</h2>
                         <div class="select">
                             <select id="standard-select">
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
+                                <%- years %>
                             </select>
                         </div>
                     </div>
                     <div id="main-btns">
                         <button id="theme" class="icon-btn"><i class="fas fa-palette fa-lg"></i></button><br>
-                        <a id="exit" href="/logbook/logout" class="icon-btn"><i class="fas fa-sign-out-alt fa-lg"></i></a>
+                        <a id="exit" href="/logbook/logout" class="icon-btn"><i class="fas fa-sign-out-alt"></i></a>
                     </div>
                 </div>
                 <div class="tables">

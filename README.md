@@ -9,5 +9,4 @@
     - 'ncu --upgrade'
     - 'npm install'
 ## Cose da fare :
-    - Fare controllo della password con lo SHA256
     - Fare switch del tema con il bottone
