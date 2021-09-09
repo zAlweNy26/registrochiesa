@@ -1,6 +1,6 @@
 SET storage_engine=InnoDB;
 SET FOREIGN_KEY_CHECKS=1;
-DROP DATABSE IF EXISTS registrogrest;
+DROP DATABASE IF EXISTS registrogrest;
 CREATE DATABASE IF NOT EXISTS registrogrest;
 USE registrogrest;
 
