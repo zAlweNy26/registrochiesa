@@ -10,4 +10,6 @@ INSERT INTO squadre(SID, Nome) VALUES(1, 'Figo');
 
 INSERT INTO animatori(AID, Squadra) VALUES(2, 1);
 
+-- SELECT * FROM giorni WHERE DATE(data) BETWEEN 'YEAR-01-01' AND 'YEAR-12-31' -- per prendere i valori di un anno del grest
+
 COMMIT;

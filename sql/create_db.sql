@@ -1,10 +1,9 @@
--- create an empty database.
 SET storage_engine=InnoDB;
 SET FOREIGN_KEY_CHECKS=1;
+DROP DATABSE IF EXISTS registrogrest;
 CREATE DATABASE IF NOT EXISTS registrogrest;
 USE registrogrest;
 
--- drop tables if they already exist
 DROP TABLE IF EXISTS squadre;
 DROP TABLE IF EXISTS bimbo;
 DROP TABLE IF EXISTS persone;
@@ -12,19 +11,11 @@ DROP TABLE IF EXISTS animatori;
 DROP TABLE IF EXISTS programma;
 DROP TABLE IF EXISTS giorni;
 
--- create tables
-
 CREATE TABLE persone (
 	PID INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	Nome CHAR(30) NOT NULL,
 	Cognome CHAR(30) NOT NULL,
 	PRIMARY KEY (PID)
-);
-
-CREATE TABLE squadre (
-	SID INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	Nome CHAR(60) NOT NULL,
-	PRIMARY KEY (SID)
 );
 
 CREATE TABLE staff_grest (
@@ -38,9 +29,17 @@ CREATE TABLE staff_grest (
 		ON UPDATE CASCADE 
 );
 
+CREATE TABLE squadre (
+	SID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	Nome CHAR(60) NOT NULL,
+	Anno SMALLINT NOT NULL,
+	PRIMARY KEY (SID)
+);
+
 CREATE TABLE animatori (
 	AID INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	Squadra INT NOT NULL,
+	Anno SMALLINT NOT NULL,
 	PRIMARY KEY (AID),
 	FOREIGN KEY (Squadra)
 		REFERENCES squadre(SID) 
@@ -55,6 +54,7 @@ CREATE TABLE animatori (
 CREATE TABLE bimbi (
 	BID INT UNSIGNED NOT NULL AUTO_INCREMENT,
     Squadra INT NOT NULL,
+	Anno SMALLINT NOT NULL,
 	Accompagnatore CHAR(60) NOT NULL,
 	PRIMARY KEY (BID),
     FOREIGN KEY (BID)
@@ -79,7 +79,7 @@ CREATE TABLE programma (
 );
 
 CREATE TABLE giorni (
-	Data TIME NOT NULL,
+	Data DATE NOT NULL,
 	GID INT NOT NULL,
 	Temperatura DOUBLE(2, 1),
 	Assente BIT(1) NOT NULL,
