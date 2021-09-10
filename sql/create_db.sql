@@ -1,14 +1,16 @@
 SET storage_engine=InnoDB;
 SET FOREIGN_KEY_CHECKS=1;
+
 DROP DATABASE IF EXISTS registrogrest;
 CREATE DATABASE IF NOT EXISTS registrogrest;
 USE registrogrest;
 
-DROP TABLE IF EXISTS squadre;
-DROP TABLE IF EXISTS bimbo;
-DROP TABLE IF EXISTS persone;
+DROP TABLE IF EXISTS partecipanti;
+DROP TABLE IF EXISTS staff_grest;
 DROP TABLE IF EXISTS animatori;
 DROP TABLE IF EXISTS programma;
+DROP TABLE IF EXISTS squadre;
+DROP TABLE IF EXISTS persone;
 DROP TABLE IF EXISTS giorni;
 
 CREATE TABLE persone (
@@ -51,7 +53,7 @@ CREATE TABLE animatori (
 		ON UPDATE CASCADE 
 );
 
-CREATE TABLE bimbi (
+CREATE TABLE partecipanti (
 	BID INT UNSIGNED NOT NULL,
     Squadra INT UNSIGNED NOT NULL,
 	Anno SMALLINT NOT NULL,
