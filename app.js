@@ -1,6 +1,7 @@
 const createError = require('http-errors')
 const express = require('express')
 const session = require('express-session')
+//const cookieSession = require('cookie-session')
 const path = require('path')
 const logger = require('morgan')
 const crypto = require('crypto')
@@ -16,8 +17,9 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-var genSecret = crypto.createHash("sha256").update("registrogrest").digest("hex")
+var genSecret = crypto.createHash("sha256").update(Date.now().toString()).digest("hex")
 
+// https://expressjs.com/en/advanced/best-practice-security.html
 // https://medium.com/@nodepractices/were-under-attack-23-node-js-security-best-practices-e33c146cb87d
 
 app.use(logger('dev'))
@@ -31,13 +33,24 @@ app.use(helmet({
       }
   },
 })) // Da usare quando sarà pronto per la produzione
+/*app.use(cookieSession({
+  name: 'registroGrestCookies',
+  keys: ['alwe'],
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'localhost', // da cambiare quando sarà in produzione
+    path: '/'
+  }
+}))*/
 app.use(session({
   genid: (req) => { return genSecret },
+  name: 'registroGrest',
 	secret: genSecret, // assicurarsi che si generi periodicamente
 	resave: false,
 	saveUninitialized: true,
   cookie: { secure: 'auto' }
-}));
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(compression()) // Da usare quando sarà pronto per la produzione

@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="wrapper lightTheme">
+            <div class="wrapper <%= theme %>">
                 <div id="mainbar">
                     <div id="profile">
                         <h3><%= name %> <%= surname %></h3>
@@ -16,7 +16,9 @@
                         <h2>Grest</h2>
                         <div class="select">
                             <select id="standard-select">
-                                <%- years %>
+                                <% options.forEach((opt) => { %>
+                                    <option <% opt == new Date().getFullYear() ? 'selected' : '' %> value=<%= opt %>><%= opt %></option>
+                                <% }) %>
                             </select>
                         </div>
                     </div>
@@ -26,7 +28,7 @@
                     </div>
                 </div>
                 <div class="tables">
-                    Prova
+                    <%- include('./table'); %>
                 </div>
             </div>
         </div>

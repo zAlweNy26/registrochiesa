@@ -9,4 +9,4 @@
     - 'ncu --upgrade'
     - 'npm install'
 ## Cose da fare :
-    - Fare switch del tema con il bottone
+    - Fare switch del tema con il bottone e salvare nei cookie client-side
