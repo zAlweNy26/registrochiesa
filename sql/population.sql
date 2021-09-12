@@ -7,6 +7,7 @@ INSERT INTO staff_grest(SGID, Nickname, Password) VALUES(1, 'alwe', SHA2('alwe',
 INSERT INTO staff_grest(SGID, Nickname, Password) VALUES(2, 'prova', SHA2('esempio', 256));
 
 INSERT INTO squadre(Nome, Anno) VALUES('Boh', YEAR(CURRENT_DATE()));
+INSERT INTO squadre(Nome, Anno) VALUES('Lol', 2020);
 
 INSERT INTO animatori(AID, Squadra, Anno) VALUES(2, 1, YEAR(CURRENT_DATE()));
 

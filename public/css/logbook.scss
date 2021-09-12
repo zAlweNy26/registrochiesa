@@ -24,6 +24,12 @@
         display: flex;
         align-items: center;
     }
+
+    #main-btns, #profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }
 
 .tables {

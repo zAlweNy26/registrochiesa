@@ -28,6 +28,7 @@ router.get('/', async (req, res, next) => {
       surname: req.session.surname,
       team: req.session.team,
       options: grestYears,
+      tables: [1, 2, 3, 4, 5, 6],
       theme: 'lightTheme' //req.session.theme
     })
   } else res.redirect('/login');
