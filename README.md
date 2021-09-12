@@ -10,3 +10,4 @@
     - 'npm install'
 ## Cose da fare :
     - Fare switch del tema con il bottone e salvare nei cookie client-side
+    - Vedere foto di come impostare il tutto
