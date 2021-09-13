@@ -40,28 +40,35 @@ footer {
     width: 100%;
     justify-content: space-around;
     padding: 20px;
+    align-items: center;
     flex-wrap: wrap;
-    align-items: flex-end;
 
-    .dev {
+    #developers {
         display: flex;
+        flex-wrap: wrap;
+        align-self: center;
 
-        img {
-            border-radius: 10px;
-            margin-right: 10px;
+        .dev {
+            display: flex;
+    
+            img {
+                border-radius: 10px;
+                margin-right: 10px;
+            }
+
+            .devinfo {
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 
-    .devinfo {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+    img { height: 64px; }
 
-    img { height: 56px; }
+    #logo, .dev { margin: 10px; }
 
     #copyright { 
-        text-align: end; 
+        text-align: end;
 
         a {
             font-weight: bold;
@@ -102,6 +109,11 @@ footer {
     }
 }
 
-@media screen and (max-width: 767px) {
-    #logos { margin: 20px; }
-}
+/*
+320px — 479px : Mobile devices
+480px — 767px : iPads, Tablets
+768px — 1023px : Small screens
+1024px — 1439px : Laptops
+1440px — 2559px : Large screens, Desktops, Tv.
+2560px — ... : 2K screens and so on.
+*/
