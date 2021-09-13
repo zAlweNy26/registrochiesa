@@ -19,20 +19,23 @@
     justify-content: space-between;
     background-image: linear-gradient(to right, $secondary, $primary);
     background-attachment: fixed;
+    align-items: center;
 
     #grest { 
         display: flex;
         align-items: center;
     }
 
-    #main-btns, #profile {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+    .icon-btn { margin-left: 10px; }
+
+    p, select { 
+        font-size: $big; 
+        font-weight: bold;
     }
 }
 
 .tables {
+    font-size: $normal;
     padding: 10px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -42,8 +45,6 @@ select {
     background-color: transparent;
     border: none;
     color: $dark;
-    font-weight: bold;
-    font-size: 1.5em;
     outline: none;
     cursor: pointer;
 }

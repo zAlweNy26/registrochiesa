@@ -20,13 +20,9 @@ router.get('/', async (req, res, next) => {
       req.session.name = rs.Nome
       req.session.surname = rs.Cognome
     }).catch(err => res.send(err))
-    await doQuery('SELECT * FROM animatori A, squadre S WHERE A.AID = ? AND A.Squadra = S.SID', [req.session.sgid]).then(rs => {
-      req.session.team = rs.Nome
-    }).catch(() => req.session.team = "Nessuna")
     res.render('logbook', {
       name: req.session.name,
       surname: req.session.surname,
-      team: req.session.team,
       options: grestYears,
       tables: [1, 2, 3, 4, 5, 6],
       theme: 'lightTheme' //req.session.theme
