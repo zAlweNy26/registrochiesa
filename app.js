@@ -10,6 +10,7 @@ const compression = require('compression')
 const helmet = require('helmet')
 
 const indexRouter = require('./routes/index')
+const loginRouter = require('./routes/login')
 const logbookRouter = require('./routes/logbook')
 
 const app = express()
@@ -65,6 +66,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
+app.use('/login', loginRouter)
 app.use('/logbook', logbookRouter)
 
 app.use((req, res, next) => next(createError(404)))

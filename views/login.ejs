@@ -6,6 +6,7 @@
   </head>
   <body>
     <div class="container">
+      <a id="home" href="/" class="icon-btn"><i class="fas fa-home fa-lg"></i></a>
       <div class="wrapper <%= theme %>">
         <div class="title-text">Accedi al registro</div>
         <div class="form-container">
@@ -16,9 +17,6 @@
             <div class="field">
               <input type="password" name="password" placeholder="Password..." required>
             </div>
-            <!--<div class="pass-link">
-              <a href="#">Password dimenticata ?</a>
-            </div>-->
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Accedi">
@@ -26,7 +24,7 @@
           </form>
         </div>
       </div>
-      <button id="theme" class="icon-btn"><i class="fas fa-palette fa-lg"></i></button><br>
+      <a id="theme" class="icon-btn"><i class="fas fa-palette fa-lg"></i></a>
     </div>
     <%- include('./footer'); %>
     <script src="javascripts/login.js"></script>
