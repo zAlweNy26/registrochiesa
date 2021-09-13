@@ -45,6 +45,11 @@ footer {
 
     .dev {
         display: flex;
+
+        img {
+            border-radius: 10px;
+            margin-right: 10px;
+        }
     }
 
     .devinfo {
@@ -53,13 +58,19 @@ footer {
         justify-content: space-between;
     }
 
-    img {
-        border-radius: 10px;
-        height: 56px;
-        margin-right: 10px;
-    }
+    img { height: 56px; }
 
-    #copyright { text-align: end; }
+    #copyright { 
+        text-align: end; 
+
+        a {
+            font-weight: bold;
+            background: linear-gradient(to right, $primary, $secondary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
 }
 
 .icon-btn {

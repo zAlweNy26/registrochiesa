@@ -6,7 +6,10 @@ const { doQuery } = require('../functions')
 var switchTheme = ''
 
 router.get('/', (req, res, next) => {
-  res.redirect('/login')
+  //if (req.session.theme == null) req.session.theme = 'lightTheme'
+  res.render('info', {
+    theme: 'lightTheme' //req.session.theme
+  })
 })
 
 router.get('/login', (req, res, next) => {

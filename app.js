@@ -55,7 +55,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(compression()) // Da usare quando sarà pronto per la produzione
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public/css'),
+  src: path.join(__dirname, 'public/scss'),
+  dest: path.join(__dirname, 'public/css'),
   indentedSyntax: false,
   outputStyle: 'compressed',
   debug: true,
