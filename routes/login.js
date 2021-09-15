@@ -15,9 +15,9 @@ router.post('/', async (req, res) => {
   let psw = req.body.password
   if (nick && psw) {
     psw = crypto.createHash("sha256").update(psw).digest("hex")
-    await doQuery('SELECT * FROM staff_grest WHERE Nickname = ? AND Password = ?', [nick, psw]).then(rs => {
+    await doQuery('SELECT SID FROM staff WHERE Nickname = ? AND Password = ?', [nick, psw]).then(rs => {
       req.session.logged = true
-      req.session.sgid = rs.SGID
+      req.session.sid = rs.SID
       //req.session.theme = switchTheme
       res.redirect('/logbook')
     }).catch(() => res.send('Password sbagliata !'))
