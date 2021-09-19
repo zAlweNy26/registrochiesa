@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { doQuery } = require('../functions')
 
-const jobs = ['Nessuna', 'Grest', 'Doposcuola'] // SELECT Occupazione FROM lavoratori L WHERE L.LID = ?
+const jobs = ['Nessuna', 'Grest', 'Doposcuola'] // SELECT Occupazione FROM lavoratori L WHERE L.ID = ?
 
 router.get('/', async (req, res, next) => {
   if (req.session.logged) {
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
       }
       grestYears = grestYears.sort((a, b) => { return a - b; })
     }).catch(err => res.send(err))
-    await doQuery('SELECT Nome, Cognome FROM utenti U WHERE U.UID = ?', [req.session.sid]).then(rs => {
+    await doQuery('SELECT Nome, Cognome FROM utenti U WHERE U.ID = ?', [req.session.ID]).then(rs => {
       req.session.name = rs.Nome
       req.session.surname = rs.Cognome
     }).catch(err => res.send(err))
