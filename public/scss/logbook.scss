@@ -21,11 +21,6 @@
     background-attachment: fixed;
     align-items: center;
 
-    #grest { 
-        display: flex;
-        align-items: center;
-    }
-
     .icon-btn { margin-left: 10px; }
 
     p, select { 
@@ -44,6 +39,7 @@
 select {
     background-color: transparent;
     border: none;
+    text-align: end;
     color: $dark;
     outline: none;
     cursor: pointer;

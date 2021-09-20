@@ -8,20 +8,15 @@
         <div class="container">
             <div class="wrapper <%= theme %>">
                 <div id="mainbar">
-                    <div id="profile">
+                    <div>
                         <p><%= name %> <%= surname %></p>
                     </div>
-                    <div id="grest">
-                        <p>Grest</p>
-                        <div class="select">
-                            <select id="standard-select">
-                                <% options.forEach(opt => { %>
-                                    <option <% opt == new Date().getFullYear() ? 'selected' : '' %> value=<%= opt %>><%= opt %></option>
-                                <% }) %>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="main-btns">
+                    <select id="activities">
+                        <% services.forEach(act => { %>
+                            <option <% act.year == new Date().getFullYear() ? 'selected' : '' %> value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
+                        <% }) %>
+                    </select>
+                    <div>
                         <button id="theme" class="icon-btn"><i class="fas fa-palette"></i></button>
                         <a id="exit" href="/logbook/logout" class="icon-btn"><i class="fas fa-sign-out-alt"></i></a>
                     </div>

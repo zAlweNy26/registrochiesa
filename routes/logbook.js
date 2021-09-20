@@ -2,30 +2,21 @@ const express = require('express')
 const router = express.Router()
 const { doQuery } = require('../functions')
 
-const jobs = ['Nessuna', 'Grest', 'Doposcuola'] // SELECT Occupazione FROM lavoratori L WHERE L.ID = ?
-
 router.get('/', async (req, res, next) => {
   if (req.session.logged) {
-    let grestYears = []
-    await doQuery('SELECT Anno FROM squadre').then(rs => {
-      let curYear = new Date().getFullYear()
-      if (rs.length == null) {
-        grestYears.push(rs.Anno)
-        if (rs.Anno != curYear) grestYears.push(curYear)
-      } else {
-        grestYears = [...new Set(rs.map(item => item.Anno))]
-        if (!grestYears.find(item => item == curYear)) years.push(curYear)
-      }
-      grestYears = grestYears.sort((a, b) => { return a - b; })
+    let activities = []
+    await doQuery('SELECT * FROM anni INNER JOIN ruoli ON anni.servizio = ruoli.servizio AND ruoli.ID = ?', [req.session.role]).then(rs => {
+      if (rs.length == null) activities.push({ID: rs.ID, service: rs.servizio, year: rs.anno})
+      else rs.forEach(act => activities.push({ID: act.ID, service: act.servizio, year: act.anno}))
     }).catch(err => res.send(err))
-    await doQuery('SELECT Nome, Cognome FROM utenti U WHERE U.ID = ?', [req.session.ID]).then(rs => {
-      req.session.name = rs.Nome
-      req.session.surname = rs.Cognome
+    await doQuery('SELECT nome, cognome FROM utenti WHERE ID = ?', [req.session.ID]).then(rs => {
+      req.session.name = rs.nome
+      req.session.surname = rs.cognome
     }).catch(err => res.send(err))
     res.render('logbook', {
       name: req.session.name,
       surname: req.session.surname,
-      options: grestYears,
+      services: activities,
       tables: [1, 2, 3, 4, 5, 6],
       theme: 'lightTheme' //req.session.theme
     })
