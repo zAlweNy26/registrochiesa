@@ -20,6 +20,8 @@ app.set('view engine', 'ejs')
 
 var genSecret = crypto.createHash("sha256").update(Date.now().toString()).digest("hex")
 
+// https://expressjs.com/en/advanced/healthcheck-graceful-shutdown.html
+// https://expressjs.com/en/advanced/best-practice-performance.html
 // https://expressjs.com/en/advanced/best-practice-security.html
 // https://medium.com/@nodepractices/were-under-attack-23-node-js-security-best-practices-e33c146cb87d
 
@@ -33,7 +35,7 @@ app.use(helmet({
           fontSrc: ["'self'", "https://cdn.jsdelivr.net", "fonts.gstatic.com", "https://use.fontawesome.com"],
       }
   },
-})) // Da usare quando sarà pronto per la produzione
+}))
 /*app.use(cookieSession({
   name: 'registroGrestCookies',
   keys: ['alwe'],

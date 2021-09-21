@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "SET DEBUG=registrogrest:* & node ./bin/main.js",
-    "dev": "SET DEBUG=registrogrest:* & nodemon ./bin/main.js -e js,ejs,scss"
+    "dev": "SET DEBUG=registrogrest:* & nodemon ./bin/main.js -e js,ejs,scss",
+    "test": "snyk test"
   },
   "dependencies": {
     "compression": "^1.7.4",
@@ -26,6 +27,7 @@
     "node-sass-middleware": "^0.11.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "snyk": "^1.717.0"
   }
 }

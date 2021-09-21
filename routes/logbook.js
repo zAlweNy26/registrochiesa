@@ -5,7 +5,8 @@ const { doQuery } = require('../functions')
 router.get('/', async (req, res, next) => {
   if (req.session.logged) {
     let activities = []
-    await doQuery('SELECT * FROM anni INNER JOIN ruoli ON anni.servizio = ruoli.servizio AND ruoli.ID = ?', [req.session.role]).then(rs => {
+    await doQuery('SELECT * FROM anni INNER JOIN ruoli ON anni.servizio = ruoli.servizio AND ruoli.ID = ?', [req.session.role])
+    .then(rs => {
       if (rs.length == null) activities.push({ID: rs.ID, service: rs.servizio, year: rs.anno})
       else rs.forEach(act => activities.push({ID: act.ID, service: act.servizio, year: act.anno}))
     }).catch(err => res.send(err))

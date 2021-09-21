@@ -3,6 +3,7 @@ START TRANSACTION;
 DELETE FROM partecipanti;
 DELETE FROM lavoratori;
 DELETE FROM programma;
+DELETE FROM servizi;
 DELETE FROM squadre;
 DELETE FROM utenti;
 DELETE FROM giorni;
@@ -10,9 +11,11 @@ DELETE FROM ruoli;
 DELETE FROM staff;
 DELETE FROM anni;
 
-INSERT INTO anni(servizio, anno) VALUES("Doposcuola", YEAR(CURRENT_DATE())), ("Grest", 2022);
+INSERT INTO servizi(nome) VALUES("Doposcuola"), ("Grest"), ("Danza classica");
 
-INSERT INTO ruoli(servizio, livello) VALUES("Doposcuola", 1), ("Grest", 1);
+INSERT INTO anni(servizio, anno) VALUES("Doposcuola", YEAR(CURRENT_DATE())), ("Grest", 2022), ("Danza classica", 2020);
+
+INSERT INTO ruoli(ID, servizio, livello) VALUES(1, "Doposcuola", 1), (1, "Grest", 1), (2, "Grest", 1);
 
 INSERT INTO utenti(nome, cognome) VALUES("Daniele", "Nicosia"), ("Vincenzo", "D'Angelo");
 
