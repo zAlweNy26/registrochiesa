@@ -1,6 +1,7 @@
 $primary: #55C233;
 $secondary: #FFF44F;
-$dark: #292F36;
+$dark: #262626;
+$grey: #626262;
 
 $biggest: 2em;
 $bigger: 1.5em;
@@ -12,20 +13,13 @@ $smallest: 0.625em;
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 .lightTheme {
-    background-color: white !important;
-    color: $dark !important;
+    --base: #FFFFFF;
+    --low-contrast: #626262;
+    --contrast: #262626;
 }
 
 .darkTheme {
-    background-color: $dark !important;
-    color: white !important;
-
-    .login input:not([type='submit']) {
-        color: white !important;
-        background-color: $dark !important;
-        border: 1px solid white !important;
-        border-bottom-width: 3px !important;
-        
-        &::placeholder { color: white !important; }
-    }
+    --base: #262626;
+    --low-contrast: #565656;
+    --contrast: #FFFFFF;
 }
