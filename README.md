@@ -10,6 +10,5 @@
     - 'npm install'
 ## Cose da fare :
     - Usare bcrypt (installare python) per hashare le password al posto di crypto
-    - Fare switch del tema con il bottone e salvare nei cookie client-side
     - Vedere come emy vuole impostare il tutto (fargli fare la grafica)
     - Permettere a chi ha ruolo 1 di creare nuovi nickname e password per altri staffer ma solo in quel servizio 

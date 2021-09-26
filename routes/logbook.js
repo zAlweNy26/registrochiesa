@@ -14,12 +14,13 @@ router.get('/', async (req, res, next) => {
       req.session.name = rs.nome
       req.session.surname = rs.cognome
     }).catch(err => res.send(err))
+    if (req.session.theme == null) req.session.theme = 'lightTheme'
     res.render('logbook', {
       name: req.session.name,
       surname: req.session.surname,
       services: activities,
       tables: [1, 2, 3, 4, 5, 6],
-      theme: 'lightTheme' //req.session.theme
+      theme: req.session.theme
     })
   } else res.redirect('/login');
 })

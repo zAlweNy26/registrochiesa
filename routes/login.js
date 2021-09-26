@@ -4,9 +4,9 @@ const router = express.Router()
 const { doQuery } = require('../functions')
 
 router.get('/', (req, res, next) => {
-  //if (req.session.theme == null) req.session.theme = 'lightTheme'
+  if (req.session.theme == null) req.session.theme = 'lightTheme'
   res.render('login', {
-    theme: 'lightTheme' //req.session.theme
+    theme: req.session.theme
   })
 })
 
@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
       req.session.logged = true
       req.session.ID = rs.ID
       req.session.role = rs.ruolo
-      //req.session.theme = switchTheme
       res.redirect('/logbook')
     }).catch(() => res.send('Password sbagliata !'))
 	} else res.send('Nome utente o password errati !')
