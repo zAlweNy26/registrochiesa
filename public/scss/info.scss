@@ -40,15 +40,25 @@
     padding: 10px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-}
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px 10px;
+    grid-template-areas:
+      "activity kid"
+      "trip kid";
 
-select {
-    background-color: transparent;
-    border: none;
-    text-align: end;
-    color: $dark;
-    outline: none;
-    cursor: pointer;
+    #kid { grid-area: kid; }
+  
+    #activity { grid-area: activity; }
+  
+    #trip { grid-area: trip; }
+
+    .block {
+        border: 1px solid var(--contrast);
+        border-radius: 20px;
+        padding: 10px;
+    }
 }
 
 @media screen and (max-width: 767px) {
