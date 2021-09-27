@@ -11,9 +11,9 @@ DELETE FROM ruoli;
 DELETE FROM staff;
 DELETE FROM anni;
 
-INSERT INTO servizi(nome) VALUES("Doposcuola"), ("Grest"), ("Danza classica");
+INSERT INTO servizi(nome) VALUES("Doposcuola"), ("Grest"), ("Danza"), ("Inglese"), ("Jujitsu"), ("Calcio");
 
-INSERT INTO anni(servizio, anno) VALUES("Doposcuola", YEAR(CURRENT_DATE())), ("Grest", 2022), ("Danza classica", 2020);
+INSERT INTO anni(servizio, anno) VALUES("Doposcuola", YEAR(CURRENT_DATE())), ("Grest", 2022), ("Danza", 2020);
 
 INSERT INTO ruoli(ID, servizio, livello) VALUES(1, "Doposcuola", 1), (1, "Grest", 1), (2, "Grest", 1);
 

@@ -145,6 +145,7 @@ CREATE TABLE giorni (
 	ID INT UNSIGNED NOT NULL,
 	temperatura DOUBLE(2, 1),
 	assente BIT(1) NOT NULL,
+	comportamento BIT(1),
 	motivo TEXT,
 	PRIMARY KEY (data), 
     FOREIGN KEY (ID)

@@ -1,13 +1,4 @@
-#theme {
-    position: absolute;
-    cursor: pointer;
-    top: 10px;
-    right: 10px;
-}
-
-.container {
-    padding: 40px;
-}
+@import 'variables.scss';
 
 .wrapper {
     transition: 500ms;
@@ -15,4 +6,58 @@
     height: 100%;
     border-radius: 20px;
     box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+}
+
+#mainbar {
+    width: 100%;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    color: $dark;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-image: linear-gradient(to right, $secondary, $primary);
+    background-attachment: fixed;
+    align-items: center;
+
+    .icon-btn {
+        margin-left: 10px;
+
+        i { 
+            color: var(--contrast);
+            transition: 500ms;
+        }
+    }
+
+    p { 
+        font-size: $big; 
+        font-weight: bold;
+    }
+}
+
+#infos {
+    font-size: $normal;
+    padding: 10px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+select {
+    background-color: transparent;
+    border: none;
+    text-align: end;
+    color: $dark;
+    outline: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .container { padding: 0; }
+
+    .wrapper {
+        border-radius: 0;
+        box-shadow: none;
+
+        #mainbar, #infos { border-radius: 0; }
+    }
 }
