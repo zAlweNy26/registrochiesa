@@ -14,4 +14,18 @@ router.post('/switchTheme', async (req, res, next) => {
   await req.session.save()
 })
 
+router.get('/searchID', async (req, res, next) => {
+  await doQuery('SELECT * FROM utenti, anni, squadre, (SELECT * FROM partecipanti WHERE codice = ?) AS part WHERE utenti.ID = part.ID', [req.query.ID]).then(rs => {
+    console.log(rs)
+    res.json({ 
+      status: 200
+      //name: rs.nome,
+      //surname: rs.cognome,
+      //team: rs.squadra,
+      //year: rs.anno,
+      //companion: rs.accompagnatore
+    })
+  }).catch(() => res.json({ status: 404 }))
+})
+
 module.exports = router

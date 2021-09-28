@@ -38,7 +38,7 @@ html, body {
 }
 
 footer {
-    font-size: $small;
+    font-size: $smaller;
     display: flex;
     background: $dark;
     color: white;
@@ -94,6 +94,19 @@ footer {
         color: $dark; 
         font-size: $bigger;
     }
+}
+
+.mainbar {
+    width: 100%;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    color: $dark;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-image: linear-gradient(to right, $secondary, $primary);
+    background-attachment: fixed;
+    align-items: center;
 }
 
 ::-webkit-scrollbar {

@@ -43,7 +43,7 @@ form {
             background-color: var(--base);
             border: 1px solid $grey;
             border-bottom-width: 3px;
-            font-size: 17px;
+            font-size: $normal;
             transition: all 0.3s ease;
 
             &:focus {

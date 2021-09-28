@@ -8,18 +8,7 @@
     box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
 }
 
-#mainbar {
-    width: 100%;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    color: $dark;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    background-image: linear-gradient(to right, $secondary, $primary);
-    background-attachment: fixed;
-    align-items: center;
-
+.mainbar {
     .icon-btn { margin-left: 10px; }
 
     p, select { 
@@ -29,7 +18,7 @@
 }
 
 #tables {
-    font-size: $normal;
+    font-size: $small;
     padding: 10px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -51,6 +40,6 @@ select {
         border-radius: 0;
         box-shadow: none;
 
-        #mainbar, #tables { border-radius: 0; }
+        .mainbar, #tables { border-radius: 0; }
     }
 }
