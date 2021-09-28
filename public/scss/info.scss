@@ -50,6 +50,16 @@
             border-radius: 10px;
         }
 
+        .maininfos {
+            display: flex;
+            justify-content: space-between;
+            flex-flow: row wrap;
+
+            span {
+                font-weight: bold;
+            }
+        }
+
         /*input[type=text] {
             padding: 0 5px 0 5px;
             border-radius: 10px;

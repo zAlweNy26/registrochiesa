@@ -25,7 +25,7 @@ INSERT INTO squadre(nome, anno) VALUES("Boh", 1), ("Lol", 2);
 
 INSERT INTO lavoratori(ID, squadra, anno, ruolo) VALUES(2, 1, 2, 2);
 
-INSERT INTO partecipanti(ID, squadra, anno, codice) VALUES(2, 1, 2, RINT(1000000, 9999999));
+INSERT INTO partecipanti(ID, squadra, anno, codice, accompagnatore) VALUES(2, 1, 2, RINT(1000000, 9999999), "Sto cazzo"), (1, NULL, 1, RINT(1000000, 9999999), NULL);
 
 -- SELECT * FROM giorni WHERE DATE(Data) BETWEEN "YEAR-01-01" AND "YEAR-12-31" -- per prendere i valori di un anno del grest
 
