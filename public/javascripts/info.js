@@ -1,10 +1,11 @@
-$("input[name='searchid']").click(() => {
+$("#kid .searchbtn").click(() => {
     $.ajax({
         url: "/searchID",
         type: "GET",
         data: {
             'ID': $("input[name='idcode']").val(),
         },
+        async: false,
         success: (res) => {
             if (res.status == 200) {
                 let template = `
@@ -31,4 +32,15 @@ $("input[name='searchid']").click(() => {
             $('#kid .block').html("ID non trovato !")
         }
     })
+    $('#kid .mainbar').css({
+        'border-bottom-right-radius': '0px',
+        'border-bottom-left-radius': '0px'
+    })
+    $('#kid .block').css({
+        'padding': '10px',
+        'border-width': '2px'
+    })
+    let kidBlocksHeight = 0
+    $("#kid .block > div").each(function() { kidBlocksHeight += $(this).outerHeight() })
+    $("#kid .block").animate({ height: (kidBlocksHeight + 24) + "px" }, 250)
 })
