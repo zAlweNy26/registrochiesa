@@ -146,7 +146,7 @@ CREATE TABLE programma (
 CREATE TABLE giorni (
 	gdata DATE NOT NULL,
 	ID INT UNSIGNED NOT NULL,
-	temperatura DOUBLE(2, 1),
+	temperatura DOUBLE,
 	assente BIT(1) NOT NULL,
 	motivo TEXT,
 	comportamento BIT(1),
