@@ -11,7 +11,7 @@
                     <div>
                         <p><%= name %> <%= surname %></p>
                     </div>
-                    <select id="activities">
+                    <select id="services">
                         <% services.forEach(act => { %>
                             <option <% act.year == new Date().getFullYear() ? 'selected' : '' %> value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
                         <% }) %>

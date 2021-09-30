@@ -1,5 +1,6 @@
 $('#activities').change(() => {
     let selected = $(this).find("option:selected").val()
+    console.log(selected)
 })
 
 $("#kid .searchbtn").click(() => {
@@ -17,22 +18,22 @@ $("#kid .searchbtn").click(() => {
                         <p><span>Nome : </span><%= name %></p>
                         <p><span>Cognome : </span><%= surname %></p>
                         <select id="activities">
+                            <option value="" disabled selected hidden>Scegli un'attività</option>
                             <% services.forEach(act => { %>
-                                <option <% act.year == new Date().getFullYear() ? 'selected' : '' %> value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
+                                <option value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
                             <% }) %>
                         </select>
                     </div>
                 `;
-                console.log(res)
                 $('#kid .block').html(ejs.render(template, {
                     name: res.name,
                     surname: res.surname,
                     services: res.activities
                 }))
-            } else $('#kid .block').html("Codice identificativo non trovato !")
+            } else $('#kid .block').html("<p>Codice identificativo non trovato !</p>")
         },
         error: (err) => {
-            $('#kid .block').html("ID non trovato !")
+            $('#kid .block').html("<p>ID non trovato !</p>")
         }
     })
     $('#kid .mainbar').css({

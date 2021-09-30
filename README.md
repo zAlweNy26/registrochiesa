@@ -12,3 +12,4 @@
     - Usare bcrypt (installare python) per hashare le password al posto di crypto
     - Vedere come emy vuole impostare il tutto (fargli fare la grafica)
     - Settare permessi
+    - Usare gli optgroup al posto delle option normali nei select

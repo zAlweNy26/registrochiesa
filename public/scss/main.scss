@@ -103,6 +103,15 @@ footer {
     align-items: center;
 }
 
+select {
+    background-color: transparent;
+    border: none;
+    text-align: end;
+    color: $dark;
+    outline: none;
+    cursor: pointer;
+}
+
 .searchbox {
     position: relative;
     width: 205px;

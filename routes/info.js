@@ -22,7 +22,7 @@ router.get('/searchUID', async (req, res, next) => {
     obj.name = rs.nome
     obj.surname = rs.cognome
   }).catch(() => obj.status = 404)
-  await doQuery('SELECT * FROM anni WHERE anni.ID = (SELECT anno FROM partecipanti WHERE partecipanti.ID = ?)', [obj.ID]).then(rs => {
+  await doQuery('SELECT * FROM anni WHERE anni.ID IN (SELECT anno FROM partecipanti WHERE partecipanti.ID = ?)', [obj.ID]).then(rs => {
     let activities = []
     if (rs.length == null) activities.push({ID: rs.ID, service: rs.servizio, year: rs.anno})
     else rs.forEach(act => activities.push({ID: act.ID, service: act.servizio, year: act.anno}))

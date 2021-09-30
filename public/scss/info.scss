@@ -76,6 +76,12 @@
         border-radius: 20px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
+
+        select {
+            color: var(--contrast);
+
+            option { background: var(--base); }
+        }
     }
 }
 
