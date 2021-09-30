@@ -181,8 +181,10 @@ footer {
     .container { padding: 0; }
 
     .wrapper {
-        border-radius: 0;
+        border-radius: 0 !important;
         box-shadow: none;
+
+        & > .mainbar { border-radius: 0 !important; }
     }
 }
 

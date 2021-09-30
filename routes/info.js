@@ -14,20 +14,20 @@ router.post('/switchTheme', async (req, res, next) => {
   await req.session.save()
 })
 
-router.get('/searchID', async (req, res, next) => {
+router.get('/searchUID', async (req, res, next) => {
   let obj = {}
-  await doQuery('SELECT utenti.nome, utenti.cognome, COALESCE(parts.accompagnatore, "Nessuno") AS accompagnatore, anni.anno, anni.servizio, parts.squadra FROM utenti, anni, (SELECT * FROM partecipanti WHERE codice = ?) AS parts WHERE utenti.ID = parts.ID AND anni.ID = parts.anno', [req.query.ID]).then(rs => {
+  await doQuery('SELECT * FROM utenti WHERE UID = ?', [req.query.UID]).then(rs => {
     obj.status = 200
+    obj.ID = rs.ID
     obj.name = rs.nome
     obj.surname = rs.cognome
-    obj.year = rs.anno
-    obj.team = rs.squadra
-    obj.companion = rs.accompagnatore
-    obj.activity = rs.servizio
   }).catch(() => obj.status = 404)
-  await doQuery('SELECT nome FROM squadre WHERE squadre.ID = ?', [obj.team]).then(rs => {
-    obj.team = rs.nome
-  }).catch(() => obj.team = "Nessuna")
+  await doQuery('SELECT * FROM anni WHERE anni.ID = (SELECT anno FROM partecipanti WHERE partecipanti.ID = ?)', [obj.ID]).then(rs => {
+    let activities = []
+    if (rs.length == null) activities.push({ID: rs.ID, service: rs.servizio, year: rs.anno})
+    else rs.forEach(act => activities.push({ID: act.ID, service: act.servizio, year: act.anno}))
+    obj.activities = activities
+  }).catch(() => obj.status = 404)
   if (obj.status == 200) res.json(obj)
   else res.json({status: 404})
 })
