@@ -29,6 +29,12 @@ INSERT INTO lavoratori(ID, squadra, anno, ruolo) VALUES(2, 1, 2, 2);
 
 INSERT INTO partecipanti(ID, squadra, anno, accompagnatore) VALUES(2, 1, 2, "Sto cazzo"), (1, NULL, 1, NULL), (1, NULL, 2, NULL);
 
--- SELECT * FROM giorni WHERE DATE(Data) BETWEEN "YEAR-01-01" AND "YEAR-12-31" -- per prendere i valori di un anno del grest
+INSERT INTO programma(pdata, descrizione, servizio) VALUES("2021-01-01", "Cazzeggio", "Doposcuola"), ("2022-01-01", "Boh", "Grest");
+
+INSERT INTO giorni(gdata, ID, temperatura, assente, motivo, comportamento) VALUES("2021-01-01", 1, 36.8, 0, "", 1);
+
+-- SELECT * FROM programma WHERE DATE(data) BETWEEN "YEAR-01-01" AND "YEAR-12-31" -- per prendere i valori di un anno del grest
+
+-- SELECT S.nome FROM squadre S, lavoratori L WHERE L.anno = 2 AND S.ID = L.squadra
 
 COMMIT;

@@ -1,11 +1,31 @@
-$('#activities').change(() => {
-    let selected = $(this).find("option:selected").val()
-    console.log(selected)
+$('.wrapper').on('change', '#activities', function() {
+    $.ajax({
+        url: "/getServiceInfo",
+        type: "GET",
+        data: {
+            'ID': $(this).find("option:selected").val(),
+        },
+        async: false,
+        success: (res) => {
+            let template = `
+                <%= year %>
+            `;
+            $('#kid .block #yearinfo').html(ejs.render(template, {
+                year: res.year
+            }))
+        },
+        error: (err) => {
+            $('#kid .block #yearinfo').html("<p>ID non trovato !</p>")
+        }
+    })
+    let kidBlocksHeight = 0
+    $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
+    $("#kid .block").animate({ height: (kidBlocksHeight + 24) + "px" }, 250)
 })
 
 $("#kid .searchbtn").click(() => {
     $.ajax({
-        url: "/searchUID",
+        url: "/searchUser",
         type: "GET",
         data: {
             'UID': $("input[name='idcode']").val(),
@@ -24,6 +44,7 @@ $("#kid .searchbtn").click(() => {
                             <% }) %>
                         </select>
                     </div>
+                    <div id="yearinfo"></div>
                 `;
                 $('#kid .block').html(ejs.render(template, {
                     name: res.name,

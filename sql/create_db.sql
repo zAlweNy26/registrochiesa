@@ -133,18 +133,18 @@ CREATE TABLE partecipanti (
 );
 
 CREATE TABLE programma (
-	data DATE NOT NULL,
+	pdata DATE NOT NULL,
 	descrizione TEXT,
-	ID INT UNSIGNED NOT NULL,
-	PRIMARY KEY (data),
-	FOREIGN KEY (ID)
-		REFERENCES utenti(ID) 
+	servizio VARCHAR(64) NOT NULL,
+	PRIMARY KEY (data, servizio),
+	FOREIGN KEY (servizio)
+		REFERENCES servizi(nome) 
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
 
 CREATE TABLE giorni (
-	data DATE NOT NULL,
+	gdata DATE NOT NULL,
 	ID INT UNSIGNED NOT NULL,
 	temperatura DOUBLE(2, 1),
 	assente BIT(1) NOT NULL,
