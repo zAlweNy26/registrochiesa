@@ -136,7 +136,7 @@ CREATE TABLE programma (
 	pdata DATE NOT NULL,
 	descrizione TEXT,
 	servizio VARCHAR(64) NOT NULL,
-	PRIMARY KEY (data, servizio),
+	PRIMARY KEY (pdata, servizio),
 	FOREIGN KEY (servizio)
 		REFERENCES servizi(nome) 
 		ON DELETE CASCADE
@@ -150,7 +150,7 @@ CREATE TABLE giorni (
 	assente BIT(1) NOT NULL,
 	motivo TEXT,
 	comportamento BIT(1),
-	PRIMARY KEY (data), 
+	PRIMARY KEY (gdata), 
     FOREIGN KEY (ID)
 		REFERENCES utenti(ID) 
 		ON DELETE CASCADE

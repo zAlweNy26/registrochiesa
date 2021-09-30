@@ -16,6 +16,7 @@ router.post('/switchTheme', async (req, res, next) => {
 
 router.get('/searchUser', async (req, res, next) => {
   let obj = {}
+  req.session.UID = req.query.UID
   await doQuery('SELECT * FROM utenti WHERE UID = ?', [req.query.UID]).then(rs => {
     obj.status = 200
     obj.ID = rs.ID

@@ -3,7 +3,7 @@ $('.wrapper').on('change', '#activities', function() {
         url: "/getServiceInfo",
         type: "GET",
         data: {
-            'ID': $(this).find("option:selected").val(),
+            'ID': $(this).find("option:selected").val()
         },
         async: false,
         success: (res) => {
@@ -38,7 +38,7 @@ $("#kid .searchbtn").click(() => {
                         <p><span>Nome : </span><%= name %></p>
                         <p><span>Cognome : </span><%= surname %></p>
                         <select id="activities">
-                            <option value="" disabled selected hidden>Scegli un'attività</option>
+                            <option value="0" disabled selected hidden>Scegli un'attività</option>
                             <% services.forEach(act => { %>
                                 <option value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
                             <% }) %>
