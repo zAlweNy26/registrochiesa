@@ -40,7 +40,8 @@
     #kid { 
         grid-area: kid;
 
-        .mainbar { 
+        .mainbar {
+            justify-content: space-evenly;
             border-radius: 20px; // modificato via js
         }
 
@@ -49,9 +50,9 @@
             justify-content: space-evenly;
             flex-flow: row wrap;
 
-            span {
-                font-weight: bold;
-            }
+            p { line-height: normal; }
+
+            span { font-weight: bold; }
         }
 
         .block {
@@ -60,6 +61,8 @@
             border-width: 0px; // modificato via js
             border-color: var(--contrast);
             border-style: solid;
+
+            & > p { text-align: center; }
         }
     }
 

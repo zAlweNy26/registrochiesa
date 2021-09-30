@@ -45,6 +45,6 @@ $("#kid .searchbtn").click(() => {
         'border-width': '2px'
     })
     let kidBlocksHeight = 0
-    $("#kid .block > div").each(function() { kidBlocksHeight += $(this).outerHeight() })
+    $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
     $("#kid .block").animate({ height: (kidBlocksHeight + 24) + "px" }, 250)
 })
