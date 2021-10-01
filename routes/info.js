@@ -16,12 +16,13 @@ router.post('/switchTheme', async (req, res, next) => {
 
 router.get('/searchUser', async (req, res, next) => {
   let obj = {}
-  req.session.UID = req.query.UID
+  //req.session.UID = req.query.UID
   await doQuery('SELECT * FROM utenti WHERE UID = ?', [req.query.UID]).then(rs => {
     obj.status = 200
     obj.ID = rs.ID
     obj.name = rs.nome
     obj.surname = rs.cognome
+    req.session.ID = rs.ID
   }).catch(() => obj.status = 404)
   await doQuery('SELECT * FROM anni WHERE anni.ID IN (SELECT anno FROM partecipanti WHERE partecipanti.ID = ?)', [obj.ID]).then(rs => {
     let activities = []

@@ -21,8 +21,6 @@ INSERT INTO utenti(nome, cognome) VALUES("Daniele", "Nicosia"), ("Vincenzo", "D'
 
 INSERT INTO staff(ID, nickname, password, ruolo) VALUES(1, "alwe", SHA2("alwe", 256), 1), (2, "vinc", SHA2("dang", 256), 2);
 
--- INSERT DI PROVA :
-
 INSERT INTO anni(servizio, anno) VALUES("Doposcuola", YEAR(CURRENT_DATE())), ("Grest", 2022), ("Danza", 2020);
 
 INSERT INTO squadre(nome, anno, capo) VALUES("Boh", 1, 2), ("Lol", 2, 2);
@@ -37,8 +35,16 @@ INSERT INTO programma(pdata, descrizione, servizio) VALUES("2021-01-01", "Cazzeg
 
 -- SELECT DI PROVA :
 
--- SELECT * FROM programma INNER JOIN giorni ON pdata BETWEEN "YEAR-01-01" AND "YEAR-12-31" AND pdata = gdata AND ID = ?; -- per prendere i valori di un anno del grest
+-- Prende servizio e anno dal value del dropdown menu (ovvero gli ID dei vari anni a cui ha partecipato l'utente)
+-- SELECT * FROM anni WHERE ID = ?;
 
--- SELECT S.nome FROM squadre S, lavoratori L WHERE L.anno = 2 AND S.ID = L.squadra
+-- Controllare se servizio = Grest
+-- Se sì :
+-- Prende nome squadra e capo squadra se l'attività è Grest 
+-- SELECT nome, capo FROM squadre WHERE anno = ?;
+-- Se no : non fare nulla
+
+-- Prende valori da giorni e programma nell'arco di due date per uno specifico utente
+-- SELECT * FROM programma INNER JOIN giorni ON pdata BETWEEN "YEAR-01-01" AND "YEAR-12-31" AND pdata = gdata AND ID = ?;
 
 COMMIT;

@@ -13,3 +13,4 @@
     - Vedere come emy vuole impostare il tutto (fargli fare la grafica)
     - Settare permessi
     - Usare gli optgroup al posto delle option normali nei select
+    - Chiedere se si vuole che si mostrino i dati anche in base al UID dei lavoratori (es. animatori)
