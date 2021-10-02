@@ -29,7 +29,7 @@ INSERT INTO lavoratori(ID, squadra, anno, ruolo) VALUES(2, 1, 2, 2);
 
 INSERT INTO partecipanti(ID, squadra, anno, accompagnatore) VALUES(1, NULL, 1, NULL), (1, 2, 2, NULL);
 
-INSERT INTO giorni(gdata, ID, temperatura, assente, motivo, comportamento) VALUES("2021-01-01", 1, 36.8, 0, NULL, 1), VALUES("2022-01-01", 1, 38.2, 1, "Febbre", NULL);
+INSERT INTO giorni(gdata, ID, temperatura, assente, motivo, comportamento) VALUES("2021-01-01", 1, 36.8, 0, NULL, 1), ("2022-01-01", 1, 38.2, 1, "Febbre", NULL);
 
 INSERT INTO programma(pdata, descrizione, servizio) VALUES("2021-01-01", "Cazzeggio", "Doposcuola"), ("2022-01-01", "Boh", "Grest");
 
@@ -46,5 +46,7 @@ INSERT INTO programma(pdata, descrizione, servizio) VALUES("2021-01-01", "Cazzeg
 
 -- Prende valori da giorni e programma nell'arco di due date per uno specifico utente
 -- SELECT * FROM programma INNER JOIN giorni ON pdata BETWEEN "YEAR-01-01" AND "YEAR-12-31" AND pdata = gdata AND ID = ?;
+
+-- SELECT * FROM anni WHERE anni.ID IN ((SELECT anno FROM partecipanti WHERE partecipanti.ID = 2) OR (SELECT anno FROM lavoratori WHERE lavoratori.ID = 2))
 
 COMMIT;

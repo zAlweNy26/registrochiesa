@@ -39,6 +39,17 @@ CREATE TABLE servizi (
 	PRIMARY KEY (nome)
 );
 
+CREATE TABLE programma (
+	pdata DATE NOT NULL,
+	descrizione TEXT,
+	servizio VARCHAR(64) NOT NULL,
+	PRIMARY KEY (pdata, servizio),
+	FOREIGN KEY (servizio)
+		REFERENCES servizi(nome) 
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
 CREATE TABLE anni (
 	ID SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	servizio VARCHAR(64) NOT NULL,
@@ -81,7 +92,7 @@ CREATE TABLE squadre (
 	ID INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(64) NOT NULL,
 	anno SMALLINT UNSIGNED NOT NULL,
-	capo INT UNSIGNED NOT NULL
+	capo INT UNSIGNED NOT NULL,
 	PRIMARY KEY (ID),
 	FOREIGN KEY (anno)
 		REFERENCES anni(ID) 
@@ -135,17 +146,6 @@ CREATE TABLE partecipanti (
 		REFERENCES anni(ID) 
 		ON DELETE CASCADE
 		ON UPDATE CASCADE 
-);
-
-CREATE TABLE programma (
-	pdata DATE NOT NULL,
-	descrizione TEXT,
-	servizio VARCHAR(64) NOT NULL,
-	PRIMARY KEY (pdata, servizio),
-	FOREIGN KEY (servizio)
-		REFERENCES servizi(nome) 
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
 );
 
 CREATE TABLE giorni (
