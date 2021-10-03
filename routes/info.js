@@ -40,10 +40,18 @@ router.get('/getServiceInfo', async (req, res, next) => {
     obj.status = 200
     obj.ID = rs.ID
   }).catch(() => obj.status = 404)
-  /*await doQuery('SELECT * FROM anni WHERE ID = ?', [req.query.ID]).then(rs => {
-    obj.year = rs.anno
-  }).catch(() => obj.status = 404)*/
-  obj.year = "Prova"
+  await doQuery('SELECT accompagnatore FROM partecipanti WHERE ID = ?', [obj.ID]).then(rs => {
+    obj.companion = rs.accompagnatore || "Nessuno"
+  }).catch(() => obj.companion = null)
+  if (req.query.isGrest == 'true') {
+    await doQuery(`SELECT squadre.nome AS squadra, utenti.nome, utenti.cognome FROM squadre, utenti WHERE squadre.ID = (SELECT squadra FROM ${obj.companion == null ? 'lavoratori' : 'partecipanti'} WHERE ID = ? AND anno = ?) AND utenti.ID = squadre.capo`, [obj.ID, req.query.ID]).then(rs => {
+      obj.team = rs.squadra
+      obj.leader = `${rs.nome} ${rs.cognome}`
+    }).catch(() => obj.status = 404)
+  } else {
+    obj.team = null
+    obj.leader = null
+  }
   if (obj.status == 200) res.json(obj)
   else res.json({status: 404})
 })

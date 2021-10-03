@@ -45,12 +45,23 @@
             border-radius: 20px; // modificato via js
         }
 
-        #kidinfo {
+        #kidinfo, #yearinfo {
             display: flex;
             justify-content: space-evenly;
             flex-flow: row wrap;
 
-            p { line-height: normal; }
+            p { 
+                line-height: 30px; 
+                margin: 0 5px 0 5px; 
+            }
+
+            select { height: 30px; }
+
+            .searchbox { 
+                width: 165px; 
+
+                input { padding-right: 10px; }
+            }
 
             span { font-weight: bold; }
         }

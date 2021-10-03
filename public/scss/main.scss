@@ -112,6 +112,40 @@ select {
     cursor: pointer;
 }
 
+.datatable {
+    overflow-x: auto;
+    margin-top: 10px;
+
+    table {
+        width: 100%;
+        border-radius: 20px;
+        border-spacing: 0;
+        border: 2px solid var(--contrast);
+
+        /*thead {
+            background-image: linear-gradient(to right, $secondary, $primary);
+            background-attachment: fixed;
+        }*/
+    
+        td, th { 
+            padding: 5px;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--contrast);
+        }
+
+        tr:last-child > td { border-bottom: none; }
+
+        //tr:nth-child(even) { background-color: var(--low-contrast); }
+    
+        /*tr:hover { 
+            background-image: linear-gradient(to right, $secondary, $primary);
+            background-attachment: fixed;
+        }*/
+    
+        td { text-align: center; }
+    }
+}
+
 .searchbox {
     position: relative;
     width: 205px;
@@ -119,7 +153,7 @@ select {
 
     input {
         position: absolute;
-        border: 0;
+        border: 2px solid var(--contrast);
         outline: none;
         top: 0;
         left: 0;
