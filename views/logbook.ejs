@@ -13,7 +13,7 @@
                     </div>
                     <select id="services">
                         <% services.forEach(act => { %>
-                            <option <% act.year == new Date().getFullYear() ? 'selected' : '' %> value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
+                            <option <% act.year == new Date().getFullYear() ? 'selected' : '' %> value=<%= act.ID %>><%= act.service + ' - ' + act.year %></option>
                         <% }) %>
                     </select>
                     <div>

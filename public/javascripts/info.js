@@ -26,24 +26,21 @@ $('.wrapper').on('change', '#activities', function() {
                                     <th>Temperatura</th>
                                     <th>Assenze</th> <!-- Mettere spunta con accanto bottone per vedere la motivazione -->
                                     <th>Comportamento</th> <!-- Farlo con i pollici sù e giù -->
+                                    <th>Motivo</th>
                                     <th>Programma</th> <!-- Mettere bottone per vedere il programma -->
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>20/06/2021</td>
-                                    <td>36.8</td>
-                                    <td>No</td>
-                                    <td>Buono</td>
-                                    <td>Boh</td>
-                                </tr>
-                                <tr>
-                                    <td>21/06/2021</td>
-                                    <td>36.2</td>
-                                    <td>Sì</td>
-                                    <td>Cattivo</td>
-                                    <td>Lol</td>
-                                </tr>
+                                <% days.forEach(day => { %>
+                                    <tr>
+                                        <td><%= day.date %></td>
+                                        <td><%= day.temp %></td>
+                                        <td><%= day.presence %></td>
+                                        <td><%= day.action %></td>
+                                        <td><%= day.reason %></td>
+                                        <td><%= day.desc %></td>
+                                    </tr>
+                                <% }) %>
                             </tbody>
                         </table>
                     </div>
@@ -51,7 +48,8 @@ $('.wrapper').on('change', '#activities', function() {
                 $('#kid .block #serviceinfo').html(ejs.render(template, {
                     companion: res.companion,
                     team: res.team,
-                    leader: res.leader
+                    leader: res.leader,
+                    days: res.days
                 }))
             } else $('#kid .block #serviceinfo').html("<p>Non è stato possibile ricavare i dati di questo utente !</p>")
         },
@@ -81,7 +79,7 @@ $("#kid .searchbtn").click(() => {
                         <select id="activities">
                             <option value="0" disabled selected hidden>Scegli un'attività</option>
                             <% services.forEach(act => { %>
-                                <option value=<%= act.ID %>><%= act.service + ' ' + act.year %></option>
+                                <option value=<%= act.ID %>><%= act.service + ' - ' + act.year %></option>
                             <% }) %>
                         </select>
                     </div>

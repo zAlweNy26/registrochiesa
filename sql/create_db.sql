@@ -1,3 +1,4 @@
+SET @@global.time_zone = '+02:00';
 SET storage_engine=InnoDB;
 SET FOREIGN_KEY_CHECKS=1;
 

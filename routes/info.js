@@ -35,7 +35,7 @@ router.get('/searchUser', async (req, res, next) => {
 })
 
 router.get('/getServiceInfo', async (req, res, next) => {
-  let obj = {}
+  let obj = {}, arr = [], day = {}
   await doQuery('SELECT ID FROM utenti WHERE UID = ?', [req.session.UID]).then(rs => {
     obj.status = 200
     obj.ID = rs.ID
@@ -52,6 +52,18 @@ router.get('/getServiceInfo', async (req, res, next) => {
     obj.team = null
     obj.leader = null
   }
+  await doQuery(`SELECT * FROM anni WHERE ID = ?`, [req.query.ID]).then(rs => { obj.year = rs.anno }).catch(() => obj.status = 404)
+  await doQuery(`SELECT * FROM programma INNER JOIN giorni ON pdata BETWEEN "${obj.year}-01-01" AND "${obj.year}-12-31" AND pdata = gdata AND ID = ?`, [obj.ID]).then(rs => {
+    day.temp = rs.temperatura
+    day.desc = rs.descrizione
+    let today = new Date(rs.gdata).toISOString().split('T')[0].split("-").reverse().join("-").replace(/-/g, '/')
+    day.date = today // per qualche motivo torna al giorno precedente
+    day.reason = rs.motivo
+    day.presence = rs.assente.lastIndexOf(1) !== -1
+    day.action = rs.comportamento.lastIndexOf(1) !== -1
+    arr.push(day)
+  }).catch(() => obj.status = 404)
+  obj.days = arr
   if (obj.status == 200) res.json(obj)
   else res.json({status: 404})
 })
