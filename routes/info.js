@@ -54,13 +54,14 @@ router.get('/getServiceInfo', async (req, res, next) => {
   }
   await doQuery(`SELECT * FROM anni WHERE ID = ?`, [req.query.ID]).then(rs => { obj.year = rs.anno }).catch(() => obj.status = 404)
   await doQuery(`SELECT * FROM programma INNER JOIN giorni ON pdata BETWEEN "${obj.year}-01-01" AND "${obj.year}-12-31" AND pdata = gdata AND ID = ?`, [obj.ID]).then(rs => {
-    day.temp = rs.temperatura
+    day.temp = rs.temperatura == null ? '❔' : rs.temperatura
     day.desc = rs.descrizione
-    let today = new Date(rs.gdata).toISOString().split('T')[0].split("-").reverse().join("-").replace(/-/g, '/')
-    day.date = today // per qualche motivo torna al giorno precedente
-    day.reason = rs.motivo
-    day.presence = rs.assente.lastIndexOf(1) !== -1
-    day.action = rs.comportamento.lastIndexOf(1) !== -1
+    let today = new Date(rs.gdata)
+    today.setDate(today.getDate() + 1)
+    day.date = today.toISOString().split('T')[0].split("-").reverse().join("-").replace(/-/g, '/')
+    day.reason = rs.motivo == null ? 'Nessuno' : rs.motivo
+    day.presence = rs.assente != 0 ? '❌' : '✅' 
+    day.action = rs.comportamento != 0 ? '👍' : ' 👎'
     arr.push(day)
   }).catch(() => obj.status = 404)
   obj.days = arr
