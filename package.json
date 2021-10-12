@@ -27,7 +27,7 @@
     "node-sass-middleware": "^0.11.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12",
-    "snyk": "^1.717.0"
+    "nodemon": "^2.0.13",
+    "snyk": "^1.735.0"
   }
 }

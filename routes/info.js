@@ -53,28 +53,17 @@ router.get('/getServiceInfo', async (req, res, next) => {
     obj.leader = null
   }
   await doQuery(`SELECT * FROM anni WHERE ID = ?`, [req.query.ID]).then(rs => { obj.year = rs.anno }).catch(() => obj.status = 404)
-  await doQuery(`SELECT *, DATE_FORMAT(pdata, "%d/%m/%Y") as data FROM programma INNER JOIN giorni ON pdata BETWEEN "${obj.year}-01-01" AND "${obj.year}-12-31" AND pdata = gdata AND ID = ?`, [obj.ID]).then(rs => {
-    if (rs.length == null) {
+  await doQuery(`SELECT *, DATE_FORMAT(pdata, "%d/%m/%Y") as data FROM programma INNER JOIN giorni ON pdata BETWEEN "${obj.year}-01-01" AND "${obj.year}-12-31" AND pdata = gdata AND ID = ?`, [obj.ID], true).then(rs => {
+    rs.forEach(d => {
       days.push({
-        temp: rs.temperatura == null ? '❔' : rs.temperatura,
-        desc: rs.descrizione,
-        date: rs.data,
-        reason: rs.motivo == null ? 'Nessuno' : rs.motivo,
-        presence: rs.assente != 0 ? '❌' : '✅' ,
-        action: rs.comportamento != 0 ? '👍' : ' 👎'
+        temp: d.temperatura == null ? '❔' : d.temperatura + " °C",
+        desc: d.descrizione,
+        date: d.data,
+        reason: d.motivo == null ? "Nessuno" : d.motivo,
+        presence: d.assente != 0 ? '❌' : '✅' ,
+        action: d.comportamento == null ? '❔' : (d.comportamento != 0 ? '👍' : ' 👎')
       })
-    } else {
-      rs.forEach(d => {
-        days.push({
-          temp: d.temperatura == null ? '❔' : d.temperatura,
-          desc: d.descrizione,
-          date: d.data,
-          reason: d.motivo == null ? 'Nessuno' : d.motivo,
-          presence: d.assente != 0 ? '❌' : '✅' ,
-          action: d.comportamento != 0 ? '👍' : ' 👎'
-        })
-      })
-    }
+    })
   }).catch(() => obj.status = 404)
   obj.days = days
   if (obj.status == 200) res.json(obj)

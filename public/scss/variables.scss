@@ -24,3 +24,22 @@ $smallest: 0.625em;
     --low-contrast: #565656;
     --contrast: #FFFFFF;
 }
+
+@mixin scrollbars($size, $fgc, $bgc) {
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+        background: $fgc;
+        border-radius: 20px;
+    }
+  
+    &::-webkit-scrollbar-track { background: $bgc; }
+
+    & {
+        scrollbar-face-color: $fgc;
+        scrollbar-track-color: $bgc;
+    }
+}

@@ -14,3 +14,4 @@
     - Settare permessi
     - Usare gli optgroup al posto delle option normali nei select
     - Chiedere se si vuole che si mostrino i dati anche in base al UID dei lavoratori (es. animatori)
+    - Chiedere se un partecipante può partecipare a più attività nello stesso giorno

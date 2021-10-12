@@ -5,9 +5,7 @@ const { doQuery } = require('../functions')
 
 router.get('/', (req, res, next) => {
   if (req.session.theme == null) req.session.theme = 'lightTheme'
-  res.render('login', {
-    theme: req.session.theme
-  })
+  res.render('login', { theme: req.session.theme })
 })
 
 router.post('/', async (req, res) => {

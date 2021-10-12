@@ -59,7 +59,7 @@ $('.wrapper').on('change', '#activities', function() {
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
                                         </td>
-                                        <td data-th="Temperatura"><%= day.temp %> °C</td>
+                                        <td data-th="Temperatura"><%= day.temp %></td>
                                         <td data-th="Presente"><%= day.presence %></td>
                                         <td data-th="Comportamento"><%= day.action %> 
                                             <a id="reason" class="icon-btn" onclick="getDayInfo('<%= day.date %>', '<%= day.reason %>', true)">
@@ -117,10 +117,10 @@ $("#kid .searchbtn").click(() => {
                     surname: res.surname,
                     services: res.activities
                 }))
-            } else $('#kid .block').html("<p>Codice identificativo non trovato !</p>")
+            } else $('#kid .block').html("<p>Non è stato possibile ricavare i dati di questo utente !</p>")
         },
         error: (err) => {
-            $('#kid .block').html("<p>Codice identificativo non trovato !</p>")
+            $('#kid .block').html("<p>Non è stato possibile ricavare i dati di questo utente !</p>")
         }
     })
     $('#kid .mainbar').css({
