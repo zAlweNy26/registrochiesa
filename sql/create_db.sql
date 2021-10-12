@@ -154,8 +154,8 @@ CREATE TABLE giorni (
 	ID INT UNSIGNED NOT NULL,
 	temperatura DOUBLE,
 	assente TINYINT(1) NOT NULL,
-	motivo TEXT,
 	comportamento TINYINT(1),
+	motivo TEXT,
 	PRIMARY KEY (gdata), 
     FOREIGN KEY (ID)
 		REFERENCES utenti(ID) 

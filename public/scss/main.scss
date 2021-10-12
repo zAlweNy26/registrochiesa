@@ -112,7 +112,7 @@ select {
     cursor: pointer;
 }
 
-.datatable {
+/*.datatable {
     overflow-x: auto;
     margin-top: 10px;
 
@@ -120,20 +120,20 @@ select {
         width: 100%;
         border-radius: 20px;
         border-spacing: 0;
-        border: 2px solid var(--contrast);
+        border: 2px solid var(--contrast);*/
 
         /*thead {
             background-image: linear-gradient(to right, $secondary, $primary);
             background-attachment: fixed;
         }*/
     
-        td, th { 
+        /*td, th { 
             padding: 5px;
             vertical-align: middle;
             border-bottom: 1px solid var(--contrast);
         }
 
-        tr:last-child > td { border-bottom: none; }
+        tr:last-child > td { border-bottom: none; }*/
 
         //tr:nth-child(even) { background-color: var(--low-contrast); }
     
@@ -142,9 +142,9 @@ select {
             background-attachment: fixed;
         }*/
     
-        td { text-align: center; }
+        /*td { text-align: center; }
     }
-}
+}*/
 
 .searchbox {
     position: relative;
@@ -230,6 +230,8 @@ select {
         & > .mainbar { border-radius: 0 !important; }
     }
 }
+
+
 
 /*
 320px — 479px : Mobile devices

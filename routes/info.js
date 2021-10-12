@@ -35,7 +35,7 @@ router.get('/searchUser', async (req, res, next) => {
 })
 
 router.get('/getServiceInfo', async (req, res, next) => {
-  let obj = {}, arr = [], day = {}
+  let obj = {}, days = []
   await doQuery('SELECT ID FROM utenti WHERE UID = ?', [req.session.UID]).then(rs => {
     obj.status = 200
     obj.ID = rs.ID
@@ -53,18 +53,30 @@ router.get('/getServiceInfo', async (req, res, next) => {
     obj.leader = null
   }
   await doQuery(`SELECT * FROM anni WHERE ID = ?`, [req.query.ID]).then(rs => { obj.year = rs.anno }).catch(() => obj.status = 404)
-  await doQuery(`SELECT * FROM programma INNER JOIN giorni ON pdata BETWEEN "${obj.year}-01-01" AND "${obj.year}-12-31" AND pdata = gdata AND ID = ?`, [obj.ID]).then(rs => {
-    day.temp = rs.temperatura == null ? '❔' : rs.temperatura
-    day.desc = rs.descrizione
-    let today = new Date(rs.gdata)
-    today.setDate(today.getDate() + 1)
-    day.date = today.toISOString().split('T')[0].split("-").reverse().join("-").replace(/-/g, '/')
-    day.reason = rs.motivo == null ? 'Nessuno' : rs.motivo
-    day.presence = rs.assente != 0 ? '❌' : '✅' 
-    day.action = rs.comportamento != 0 ? '👍' : ' 👎'
-    arr.push(day)
+  await doQuery(`SELECT *, DATE_FORMAT(pdata, "%d/%m/%Y") as data FROM programma INNER JOIN giorni ON pdata BETWEEN "${obj.year}-01-01" AND "${obj.year}-12-31" AND pdata = gdata AND ID = ?`, [obj.ID]).then(rs => {
+    if (rs.length == null) {
+      days.push({
+        temp: rs.temperatura == null ? '❔' : rs.temperatura,
+        desc: rs.descrizione,
+        date: rs.data,
+        reason: rs.motivo == null ? 'Nessuno' : rs.motivo,
+        presence: rs.assente != 0 ? '❌' : '✅' ,
+        action: rs.comportamento != 0 ? '👍' : ' 👎'
+      })
+    } else {
+      rs.forEach(d => {
+        days.push({
+          temp: d.temperatura == null ? '❔' : d.temperatura,
+          desc: d.descrizione,
+          date: d.data,
+          reason: d.motivo == null ? 'Nessuno' : d.motivo,
+          presence: d.assente != 0 ? '❌' : '✅' ,
+          action: d.comportamento != 0 ? '👍' : ' 👎'
+        })
+      })
+    }
   }).catch(() => obj.status = 404)
-  obj.days = arr
+  obj.days = days
   if (obj.status == 200) res.json(obj)
   else res.json({status: 404})
 })

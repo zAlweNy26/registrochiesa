@@ -1,3 +1,24 @@
+getDayInfo = function (date = '##/##/####', info = '', of = true) {
+    let template = `
+        <div class="popup_content">
+            <div>
+                <h2><%= title %></h2>
+                <a class="icon-btn"><i class="fas fa-times"></i></a>
+            </div>
+            <p><%= desc %></p>
+        </div>
+    `
+    $('#popup').html(ejs.render(template, {
+        title: (of ? 'Comportamento' : 'Programma') + ' del ' + date,
+        desc: info
+    }))
+    $('.overlay').css({opacity: 0, visibility: "visible"}).animate({opacity: 1}, 200)
+}
+
+$('.wrapper').on('click', ".popup_content a", () => {
+    $(".overlay").animate({opacity: 0}, 200, () => $(".overlay").css({visibility: "hidden"}))
+})
+
 $('.wrapper').on('change', '#activities', function() {
     $.ajax({
         url: "/getServiceInfo",
@@ -18,33 +39,39 @@ $('.wrapper').on('change', '#activities', function() {
                             <input type="text" name="filtertable" placeholder="Cerca nella tabella...">
                         </div>
                     </div>
-                    <div id="yeartable" class="datatable">
+                    <div id="yeartable">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Data</th>
                                     <th>Temperatura</th>
-                                    <th>Assenze</th> <!-- Mettere spunta con accanto bottone per vedere la motivazione -->
+                                    <th>Presente</th> <!-- Mettere spunta con accanto bottone per vedere la motivazione -->
                                     <th>Comportamento</th> <!-- Farlo con i pollici sù e giù -->
-                                    <th>Motivo</th>
-                                    <th>Programma</th> <!-- Mettere bottone per vedere il programma -->
+                                    <!--<th>Motivo</th>
+                                    <th>Programma</th>-->
                                 </tr>
                             </thead>
                             <tbody>
                                 <% days.forEach(day => { %>
                                     <tr>
-                                        <td><%= day.date %></td>
-                                        <td><%= day.temp %></td>
-                                        <td><%= day.presence %></td>
-                                        <td><%= day.action %></td>
-                                        <td><%= day.reason %></td>
-                                        <td><%= day.desc %></td>
+                                        <td data-th="Data"><%= day.date %>
+                                            <a id="program" class="icon-btn" onclick="getDayInfo('<%= day.date %>', '<%= day.desc %>', false)">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </td>
+                                        <td data-th="Temperatura"><%= day.temp %> °C</td>
+                                        <td data-th="Presente"><%= day.presence %></td>
+                                        <td data-th="Comportamento"><%= day.action %> 
+                                            <a id="reason" class="icon-btn" onclick="getDayInfo('<%= day.date %>', '<%= day.reason %>', true)">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 <% }) %>
                             </tbody>
                         </table>
                     </div>
-                `;
+                `
                 $('#kid .block #serviceinfo').html(ejs.render(template, {
                     companion: res.companion,
                     team: res.team,
@@ -59,7 +86,7 @@ $('.wrapper').on('change', '#activities', function() {
     })
     let kidBlocksHeight = 0
     $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
-    $("#kid .block").animate({ height: (kidBlocksHeight + 24) + "px" }, 250)
+    $("#kid .block").animate({ height: (kidBlocksHeight + 34) + "px" }, 250)
 })
 
 $("#kid .searchbtn").click(() => {
@@ -84,7 +111,7 @@ $("#kid .searchbtn").click(() => {
                         </select>
                     </div>
                     <div id="serviceinfo"></div>
-                `;
+                `
                 $('#kid .block').html(ejs.render(template, {
                     name: res.name,
                     surname: res.surname,
@@ -102,12 +129,15 @@ $("#kid .searchbtn").click(() => {
     })
     $('#kid .block').css({
         'padding': '10px',
-        'border-width': '2px'
+        'border-width': '2px',
+        'border-top': 'none'
     })
     let kidBlocksHeight = 0
     $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
     $("#kid .block").animate({ height: (kidBlocksHeight + 24) + "px" }, 250)
 })
+
+$("input[name='idcode']").keyup(event => { if (event.keyCode === 13) $("#kid .searchbtn").click() })
 
 $('.wrapper').on('keyup', "input[name='filtertable']", function () {
     var value = $(this).val().toLowerCase()
