@@ -1,4 +1,4 @@
-# Registro Grest
+# Registro Salesiani
 ## Come avviarlo :
     - 'npm install' (se non lo hai già fatto)
     - 'npm run dev' (per avviarlo durante lo sviluppo) | 'npm start' (per avviarlo per la produzione)
