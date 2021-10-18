@@ -1,5 +1,5 @@
 const app = require('../app')
-const debug = require('debug')('registrogrest:server')
+const debug = require('debug')('registrochiesa:server')
 const http = require('http')
 
 const port = process.env.PORT || 3000

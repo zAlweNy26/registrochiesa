@@ -37,7 +37,7 @@ app.use(helmet({
   },
 }))
 /*app.use(cookieSession({
-  name: 'registroGrestCookies',
+  name: 'registroChiesaCookies',
   keys: ['alwe'],
   cookie: {
     secure: true,
@@ -48,7 +48,7 @@ app.use(helmet({
 }))*/
 app.use(session({
   genid: (req) => { return genSecret },
-  name: 'registroGrest',
+  name: 'registroChiesa',
 	secret: genSecret, // assicurarsi che si generi periodicamente
 	resave: false,
 	saveUninitialized: true,

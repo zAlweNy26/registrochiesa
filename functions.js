@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
 	host     : 'localhost',
 	user     : 'root',
 	password : '',
-	database : 'registrogrest'
+	database : 'registrochiesa'
 });
 
 doQuery = function (query, values = '', arr = false) {

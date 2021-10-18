@@ -30,12 +30,12 @@
           <div id="activity">
             <div class="mainbar">
               <p>Preiscrizione attività</p>
-            </div>
-            <div class="block"></div>
-          </div>
-          <div id="trip">
-            <div class="mainbar">
-              <p>Preiscrizione gita</p>
+              <select id="subacts">
+                <option value="0" disabled selected hidden>Scegli un'attività</option>
+                <% services.forEach(act => { %>
+                  <option value=<%= act.ID %>><%= act.service%></option>
+                <% }) %>
+              </select>
             </div>
             <div class="block"></div>
           </div>

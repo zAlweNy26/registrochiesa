@@ -1,5 +1,5 @@
 {
-  "name": "registrogrest",
+  "name": "registrochiesa",
   "version": "1.0.0",
   "private": true,
   "description": "Registro online per il grest !",
@@ -9,8 +9,8 @@
     "node": "14.16.1"
   },
   "scripts": {
-    "start": "SET DEBUG=registrogrest:* & node ./bin/main.js",
-    "dev": "SET DEBUG=registrogrest:* & nodemon ./bin/main.js -e js,ejs,scss",
+    "start": "SET DEBUG=registrochiesa:* & node ./bin/main.js",
+    "dev": "SET DEBUG=registrochiesa:* & nodemon ./bin/main.js -e js,ejs,scss",
     "test": "snyk test"
   },
   "dependencies": {

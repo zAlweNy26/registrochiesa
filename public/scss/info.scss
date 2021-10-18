@@ -25,6 +25,11 @@ select {
     padding: 0 5px;
     border: 2px solid var(--contrast);
     border-radius: 10px;
+    height: 30px;
+    background: var(--base);
+    color: var(--contrast);
+
+    option { background: var(--base); }
 }
 
 .overlay {
@@ -71,15 +76,15 @@ select {
     padding: 10px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    display: grid;
-    grid-template-columns: .5fr 1fr;
-    gap: 10px 10px;
-    grid-template-areas:
-      "activity kid"
-      "trip kid";
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 
     .mainbar {
-        height: 50px;
+        height: auto;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        border-radius: 20px; // modificato via js
 
         p { 
             font-size: $big; 
@@ -87,65 +92,65 @@ select {
         }
     }
 
-    #kid { 
-        grid-area: kid;
+    span { font-weight: bold; }
 
-        .mainbar {
-            justify-content: space-evenly;
-            border-radius: 20px; // modificato via js
-        }
+    #kidinfo, #yearinfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-flow: row wrap;
+        margin-bottom: 10px;
 
-        #kidinfo, #yearinfo {
-            display: flex;
-            justify-content: space-evenly;
-            flex-flow: row wrap;
-            margin-bottom: 10px;
+        .searchbox { 
+            width: 160px; 
 
-            p { 
-                line-height: 30px; 
-                margin: 0 5px 0 5px; 
-            }
-
-            select { height: 30px; }
-
-            .searchbox { 
-                width: 165px; 
-
-                input { padding-right: 10px; }
-            }
-
-            span { font-weight: bold; }
-        }
-
-        .block {
-            height: 0;
-            padding: 0; // modificato via js
-            border-width: 0px; // modificato via js
-            border-color: var(--contrast);
-            border-style: solid;
-
-            & > p { text-align: center; }
+            input { padding-right: 10px; }
         }
     }
 
-    #activity { grid-area: activity; }
-  
-    #trip { grid-area: trip; }
+    #kid { flex: 1; }
 
-    #activity .mainbar, #trip .mainbar { justify-content: center; }
+    #activity { 
+        flex: 0.75; 
+
+        #actinfo {
+            display: flex;
+            gap: 10px;
+            flex-flow: column wrap;
+            align-items: center;
+            justify-content: center;
+
+            #periodprice {
+                display: flex;
+                flex-flow: row wrap;
+                align-self: stretch;
+                align-items: center;
+                justify-content: space-around;
+            }
+        }
+
+        input[type=button] {
+            
+        }
+    }
 
     .block {
+        height: 0;
         padding: 10px;
-        border: 2px solid var(--contrast);
+        padding: 0; // modificato via js
+        border-width: 0px; // modificato via js
+        border-color: var(--contrast);
+        border-style: solid;
         border-top: none;
         border-radius: 20px;
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
+        overflow: hidden;
 
-        select {
-            color: var(--contrast);
-
-            option { background: var(--base); }
+        & > p { 
+            line-height: 30px; 
+            margin: 0 5px 0 5px; 
+            text-align: center;
         }
     }
 }
@@ -157,9 +162,6 @@ table {
     border-radius: 20px;
     overflow: hidden;
     width: 100%;
-    //position: relative;
-    
-    //* { position: relative; }
     
     td, th { text-align: center; }
   
@@ -179,16 +181,7 @@ table {
 }
 
 @media screen and (max-width: 767px) {
-    #infos {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-
-        .mainbar {
-            height: auto;
-            flex-wrap: wrap;
-        }
-    }
+    #infos { flex-direction: column; }
 
     table { 
         border: 2px solid var(--contrast);
@@ -212,7 +205,7 @@ table {
                 &:last-child { margin-bottom: 0; }
 
                 &:before { 
-                    content: attr(data-th)" :";
+                    content: attr(data-th)" : ";
                     position: absolute;
                     font-weight: bold;
                     width: 45%;
@@ -223,10 +216,3 @@ table {
         }
     }
 }
-
-@media screen and (max-width: 479px) {
-    #kid .mainbar {
-        flex-direction: column !important;
-        justify-content: center !important;
-    }
-}	

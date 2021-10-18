@@ -21,7 +21,7 @@ $('.wrapper').on('click', ".popup_content a", () => {
 
 $('.wrapper').on('change', '#activities', function() {
     $.ajax({
-        url: "/getServiceInfo",
+        url: "/getServiceInfoByUser",
         type: "GET",
         data: {
             'ID': $(this).find("option:selected").val(),
@@ -86,7 +86,7 @@ $('.wrapper').on('change', '#activities', function() {
     })
     let kidBlocksHeight = 0
     $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
-    $("#kid .block").animate({ height: (kidBlocksHeight + 34) + "px" }, 250)
+    $("#kid .block").animate({ height: (kidBlocksHeight + 34) + "px" }, 300)
 })
 
 $("#kid .searchbtn").click(() => {
@@ -127,14 +127,13 @@ $("#kid .searchbtn").click(() => {
         'border-bottom-right-radius': '0px',
         'border-bottom-left-radius': '0px'
     })
-    $('#kid .block').css({
+    let kidBlocksHeight = 0
+    $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
+    $("#kid .block").css({
         'padding': '10px',
         'border-width': '2px',
         'border-top': 'none'
-    })
-    let kidBlocksHeight = 0
-    $("#kid .block > *").each(function() { kidBlocksHeight += $(this).outerHeight() })
-    $("#kid .block").animate({ height: (kidBlocksHeight + 24) + "px" }, 250)
+    }).animate({ height: (kidBlocksHeight + 24) + "px" }, 300)
 })
 
 $("input[name='idcode']").keyup(event => { if (event.keyCode === 13) $("#kid .searchbtn").click() })
@@ -144,4 +143,47 @@ $('.wrapper').on('keyup', "input[name='filtertable']", function () {
     $("#yeartable table tbody tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     })
+})
+
+$('.wrapper').on('change', '#subacts', function() {
+    $.ajax({
+        url: "/getServiceInfo",
+        type: "GET",
+        data: {
+            'activity': $(this).find("option:selected").text()
+        },
+        async: false,
+        success: (res) => {
+            if (res.status == 200) {
+                let template = `
+                    <div id="actinfo">
+                        <div id="periodprice">
+                            <p id="period"><span>Periodo : </span>inizio - fine</p>
+                            <p id="price"><span>Prezzo : </span><%= price %> €</p>
+                        </div>
+                        <p id="desc"><span>Descrizione : </span><%= desc %>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum velit doloremque rem voluptatibus illo natus harum recusandae soluta hic porro maiores itaque odio tempore, nobis dolorum assumenda odit, nemo at.</p>
+                        <input class="btn" type="button" value="Preiscrivi">
+                    </div>
+                `
+                $('#activity .block').html(ejs.render(template, {
+                    price: res.price,
+                    desc: res.desc
+                }))
+            } else $('#activity .block').html("<p>Non è stato possibile ricavare informazioni riguardo questa attività !</p>")
+        },
+        error: (err) => {
+            $('#activity .block').html("<p>Non è stato possibile ricavare informazioni riguardo questa attività !</p>")
+        }
+    })
+    $('#activity .mainbar').css({
+        'border-bottom-right-radius': '0px',
+        'border-bottom-left-radius': '0px'
+    })
+    let actBlocksHeight = 0
+    $("#activity .block > *").each(function() { actBlocksHeight += $(this).outerHeight() })
+    $("#activity .block").css({
+        'padding': '10px',
+        'border-width': '2px',
+        'border-top': 'none'
+    }).animate({ height: (actBlocksHeight + 24) + "px" }, 300)
 })

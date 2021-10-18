@@ -2,9 +2,9 @@ SET @@global.time_zone = '+02:00';
 SET storage_engine=InnoDB;
 SET FOREIGN_KEY_CHECKS=1;
 
-DROP DATABASE IF EXISTS registrogrest;
-CREATE DATABASE IF NOT EXISTS registrogrest;
-USE registrogrest;
+DROP DATABASE IF EXISTS registrochiesa;
+CREATE DATABASE IF NOT EXISTS registrochiesa;
+USE registrochiesa;
 
 DROP TABLE IF EXISTS partecipanti;
 DROP TABLE IF EXISTS lavoratori;
@@ -30,13 +30,18 @@ CREATE TABLE utenti (
 	UID MEDIUMINT UNSIGNED NOT NULL,
 	nome VARCHAR(32) NOT NULL,
 	cognome VARCHAR(32) NOT NULL,
-	PRIMARY KEY (ID, UID)
+	PRIMARY KEY (ID),
+	UNIQUE (UID)
 );
 
 CREATE TRIGGER addUID BEFORE INSERT ON utenti FOR EACH ROW SET NEW.UID = RINT(1000000, 9999999);
 
 CREATE TABLE servizi (
 	nome VARCHAR(64) NOT NULL,
+	prezzo SMALLINT UNSIGNED NOT NULL,
+	descrizione TEXT NOT NULL,
+	beginDate DATE NOT NULL,
+	endDate DATE NOT NULL,
 	PRIMARY KEY (nome)
 );
 
@@ -78,7 +83,8 @@ CREATE TABLE staff (
 	nickname VARCHAR(20) NOT NULL,
 	password CHAR(64) NOT NULL,
 	ruolo TINYINT NOT NULL,
-	PRIMARY KEY (ID, nickname), 
+	PRIMARY KEY (ID), 
+	UNIQUE (nickname)
 	FOREIGN KEY (ID)
 		REFERENCES utenti(ID) 
 		ON DELETE CASCADE

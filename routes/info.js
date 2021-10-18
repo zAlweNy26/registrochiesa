@@ -2,10 +2,15 @@ const express = require('express')
 const router = express.Router()
 const { doQuery } = require('../functions')
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   if (req.session.theme == null) req.session.theme = 'lightTheme'
+  let activities = [], i = 1
+  await doQuery('SELECT nome FROM servizi').then(rs => {
+    rs.forEach(act => activities.push({ID: i++, service: act.nome}))
+  }).catch(err => console.log(err))
   res.render('info', {
-    theme: req.session.theme
+    theme: req.session.theme,
+    services: activities
   })
 })
 
@@ -34,7 +39,7 @@ router.get('/searchUser', async (req, res, next) => {
   else res.json({status: 404})
 })
 
-router.get('/getServiceInfo', async (req, res, next) => {
+router.get('/getServiceInfoByUser', async (req, res, next) => {
   let obj = {}, days = []
   await doQuery('SELECT ID FROM utenti WHERE UID = ?', [req.session.UID]).then(rs => {
     obj.status = 200
@@ -66,6 +71,17 @@ router.get('/getServiceInfo', async (req, res, next) => {
     })
   }).catch(() => obj.status = 404)
   obj.days = days
+  if (obj.status == 200) res.json(obj)
+  else res.json({status: 404})
+})
+
+router.get('/getServiceInfo', async (req, res, next) => {
+  let obj = {}
+  await doQuery('SELECT prezzo, descrizione FROM servizi WHERE nome = ?', [req.query.activity]).then(rs => {
+    obj.status = 200
+    obj.price = rs.prezzo
+    obj.desc = rs.descrizione
+  }).catch(() => obj.status = 404)
   if (obj.status == 200) res.json(obj)
   else res.json({status: 404})
 })

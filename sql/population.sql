@@ -11,11 +11,11 @@ DELETE FROM ruoli;
 DELETE FROM staff;
 DELETE FROM anni;
 
-INSERT INTO servizi(nome) VALUES("Doposcuola"), ("Grest"), ("Danza"), ("Inglese"), ("Jujitsu"), ("Calcio");
+-- INSERT DI PROVA :
+
+INSERT INTO servizi(nome, prezzo, descrizione) VALUES("Doposcuola", 10, "lol"), ("Grest", 5, "idk"), ("Danza", 15, "ahah"), ("Inglese", 8, "meme"), ("Jujitsu", 10, "shit"), ("Calcio", 12, "nigga"), ("Gita", 200, "what");
 
 INSERT INTO ruoli(ID, servizio, livello) VALUES(1, "Doposcuola", 1), (1, "Grest", 1), (2, "Grest", 1); -- DA COMPLETARE
-
--- INSERT DI PROVA :
 
 INSERT INTO utenti(nome, cognome) VALUES("Daniele", "Nicosia"), ("Vincenzo", "D'Angelo");
 
