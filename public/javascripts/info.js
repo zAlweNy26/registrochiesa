@@ -162,7 +162,7 @@ $('.wrapper').on('change', '#subacts', function() {
                             <p id="price"><span>Prezzo : </span><%= price %> €</p>
                         </div>
                         <p id="desc"><span>Descrizione : </span><%= desc %>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum velit doloremque rem voluptatibus illo natus harum recusandae soluta hic porro maiores itaque odio tempore, nobis dolorum assumenda odit, nemo at.</p>
-                        <input class="btn" type="button" value="Preiscrivi">
+                        <input class="mini-btn" type="button" value="Preiscrivi">
                     </div>
                 `
                 $('#activity .block').html(ejs.render(template, {
