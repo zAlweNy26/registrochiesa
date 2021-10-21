@@ -7,9 +7,7 @@
     line-height: 1.35;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html, body {
     display: flex;
@@ -30,6 +28,22 @@ html, body {
 .wrapper {
     background-color: var(--base);
     color: var(--contrast);
+}
+
+.mini-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid var(--base);
+    border-radius: 15px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: bold;
+    color: $dark;
+    text-align: center;
+    transition: all 0.35s;
+    background-image: linear-gradient(to right, $primary, $secondary);
+
+    &:hover { border-color: var(--contrast); }
 }
 
 footer {
