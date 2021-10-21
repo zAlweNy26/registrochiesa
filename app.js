@@ -71,21 +71,13 @@ app.use('/', infoRouter)
 app.use('/login', loginRouter)
 app.use('/logbook', logbookRouter)
 
-app.get('*', (req, res) => {
-  res.render('error', {
-    theme: req.session.theme,
-    message: "Minchia fai ?!",
-    error: {status: 404, stack: 0}
-  })
-});
-
 app.use((req, res, next) => next(createError(404)))
 
 app.use((err, req, res, next) => {
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
   res.status(err.status || 500)
-  res.render('error')
+  res.render('error', { error: err.status })
 })
 
 module.exports = app

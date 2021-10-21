@@ -1,4 +1,4 @@
-$('#theme').click(() => {
+$('#theme').on("click", () => {
     $('.wrapper').toggleClass('lightTheme')
     $('.wrapper').toggleClass('darkTheme')
     $.ajax({
