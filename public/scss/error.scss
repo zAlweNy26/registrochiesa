@@ -1,5 +1,18 @@
 @import 'variables.scss';
 
+@keyframes zoomIn {
+	from {
+	  	transform: rotate(180deg) scale(0.1) translate(50%, -50%);
+		top: 0;
+		left: 0;
+	}
+	to {
+	  	transform: rotate(-15deg) scale(1) translate(-50%,-50%);
+		top: 30%;
+		left: 50%;
+	}
+}
+
 .wrapper {
 	position: relative;
 	width: 100%;
@@ -9,24 +22,30 @@
 
 	h1 {
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) rotate(-15deg);
+		animation: zoomIn 1s forwards;
 		font-size: 25vmax;
 		color: $dark;
 		letter-spacing: 0.1em;
 		margin: 0;
-		transition: 500ms ease-in-out;
 	}
 
-    p {
-        position: absolute;
-        bottom: 0;  
-        right: 0;
-        color: $dark;
+	p {
+		position: absolute;
+		color: $dark;
         font-size: $biggest;
         margin: 0;
         font-weight: bold;
+	}
+
+	p:first-child {
+		top: 20px;
+		left: 20px;
+		text-align: left;
+	}
+
+    p:last-child {
+        bottom: 0;  
+        right: 0;
         text-align: right;
     }
 }
