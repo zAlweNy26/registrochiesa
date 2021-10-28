@@ -21,7 +21,7 @@ $('.wrapper').on('click', ".popup_content a", () => {
 
 $('.wrapper').on('change', '#activities', function() {
     $.ajax({
-        url: "/getServiceInfoByUser",
+        url: "/getInfoByUser",
         type: "GET",
         data: {
             'ID': $(this).find("option:selected").val(),
@@ -89,7 +89,7 @@ $('.wrapper').on('change', '#activities', function() {
     $("#kid .block").animate({ height: (kidBlocksHeight + 34) + "px" }, 300)
 })
 
-$("#kid .searchbtn").click(() => {
+$("#kid .searchbtn").on('click', () => {
     $.ajax({
         url: "/searchUser",
         type: "GET",
@@ -106,7 +106,7 @@ $("#kid .searchbtn").click(() => {
                         <select id="activities">
                             <option value="0" disabled selected hidden>Scegli un'attività</option>
                             <% services.forEach(act => { %>
-                                <option value=<%= act.ID %>><%= act.service + ' - ' + act.year %></option>
+                                <option value=<%= act.ID %>><%= act.service + ' - ' + 'semestre' %></option>
                             <% }) %>
                         </select>
                     </div>
@@ -136,7 +136,7 @@ $("#kid .searchbtn").click(() => {
     }).animate({ height: (kidBlocksHeight + 24) + "px" }, 300)
 })
 
-$("input[name='idcode']").keyup(event => { if (event.keyCode === 13) $("#kid .searchbtn").click() })
+$("input[name='idcode']").on("keyup", event => { if (event.key == "Enter") $("#kid .searchbtn").trigger("click") })
 
 $('.wrapper').on('keyup', "input[name='filtertable']", function () {
     var value = $(this).val().toLowerCase()
@@ -158,16 +158,18 @@ $('.wrapper').on('change', '#subacts', function() {
                 let template = `
                     <div id="actinfo">
                         <div id="periodprice">
-                            <p id="period"><span>Periodo : </span>inizio - fine</p>
+                            <p id="period"><span>Periodo : </span><%= begin %> - <%= end %></p>
                             <p id="price"><span>Prezzo : </span><%= price %> €</p>
                         </div>
-                        <p id="desc"><span>Descrizione : </span><%= desc %>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum velit doloremque rem voluptatibus illo natus harum recusandae soluta hic porro maiores itaque odio tempore, nobis dolorum assumenda odit, nemo at.</p>
+                        <p id="desc"><span>Descrizione : </span><%= desc %></p>
                         <input class="mini-btn" type="button" value="Preiscrivi">
                     </div>
                 `
                 $('#activity .block').html(ejs.render(template, {
                     price: res.price,
-                    desc: res.desc
+                    desc: res.desc,
+                    begin: res.begin,
+                    end: res.end
                 }))
             } else $('#activity .block').html("<p>Non è stato possibile ricavare informazioni riguardo questa attività !</p>")
         },
