@@ -30,8 +30,8 @@ router.get('/searchUser', async (req, res, next) => {
   await Promise.all([doQuery('SELECT * FROM anni WHERE ID IN (SELECT anno FROM partecipanti WHERE partecipanti.UID = ?)', [req.query.UID]).catch(error => { return error }), 
   doQuery('SELECT * FROM anni WHERE ID IN (SELECT anno FROM lavoratori WHERE lavoratori.UID = ?)', [req.query.UID]).catch(error => { return error })]).then(values => {
     let activities = [], rs = (values[0] || values[1])
-    if (rs.length == null) activities.push({ID: rs.ID, service: rs.servizio}) // aggiungere suddivisione per semestri
-    else rs.forEach(act => activities.push({ID: act.ID, service: act.servizio})) // aggiungere suddivisione per semestri
+    if (rs.length == null) activities.push({ID: rs.ID, service: rs.servizio}) // aggiungere suddivisione per periodi
+    else rs.forEach(act => activities.push({ID: act.ID, service: act.servizio})) // aggiungere suddivisione per periodi
     obj.activities = activities
   })
   if (obj.status == 200) res.json(obj)

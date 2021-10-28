@@ -106,7 +106,7 @@ $("#kid .searchbtn").on('click', () => {
                         <select id="activities">
                             <option value="0" disabled selected hidden>Scegli un'attività</option>
                             <% services.forEach(act => { %>
-                                <option value=<%= act.ID %>><%= act.service + ' - ' + 'semestre' %></option>
+                                <option value=<%= act.ID %>><%= act.service %></option> <!-- aggiungere periodi -->
                             <% }) %>
                         </select>
                     </div>
