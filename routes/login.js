@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   let psw = req.body.password
   if (nick && psw) {
     psw = crypto.createHash("sha256").update(psw).digest("hex")
-    await doQuery('SELECT UID, ruolo FROM staff WHERE nickname = ? AND password = ?', [nick, psw]).then(rs => {
+    await doQuery('SELECT staff.ID as ID, UID, ruolo FROM staff, utenti WHERE nickname = ? AND password = ? AND utenti.ID = staff.ID', [nick, psw]).then(rs => {
       req.session.logged = true
       req.session.UID = rs.UID
       req.session.role = rs.ruolo
