@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     await doQuery('SELECT * FROM anni INNER JOIN ruoli ON anni.servizio = ruoli.servizio AND ruoli.ID = ?', [req.session.role], true).then(rs => {
       rs.forEach(act => activities.push({ID: act.ID, service: act.servizio, year: act.anno}))
     }).catch(err => res.send(err))
-    await doQuery('SELECT nome, cognome FROM utenti WHERE ID = ?', [req.session.ID]).then(rs => {
+    await doQuery('SELECT nome, cognome FROM utenti WHERE UID = ?', [req.session.UID]).then(rs => {
       req.session.name = rs.nome
       req.session.surname = rs.cognome
     }).catch(err => res.send(err))

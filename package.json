@@ -2,7 +2,7 @@
   "name": "registrochiesa",
   "version": "1.0.0",
   "private": true,
-  "description": "Registro online per il grest !",
+  "description": "Registro online per i salesiani di Trapani",
   "author": "zAlweNy26",
   "license": "ISC",
   "engines": {
@@ -27,7 +27,7 @@
     "node-sass-middleware": "^0.11.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13",
-    "snyk": "^1.738.0"
+    "nodemon": "^2.0.14",
+    "snyk": "^1.746.0"
   }
 }

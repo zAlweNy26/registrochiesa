@@ -13,9 +13,9 @@ router.post('/', async (req, res) => {
   let psw = req.body.password
   if (nick && psw) {
     psw = crypto.createHash("sha256").update(psw).digest("hex")
-    await doQuery('SELECT ID, ruolo FROM staff WHERE nickname = ? AND password = ?', [nick, psw]).then(rs => {
+    await doQuery('SELECT UID, ruolo FROM staff WHERE nickname = ? AND password = ?', [nick, psw]).then(rs => {
       req.session.logged = true
-      req.session.ID = rs.ID
+      req.session.UID = rs.UID
       req.session.role = rs.ruolo
       res.redirect('/logbook')
     }).catch(() => res.send('Password sbagliata !'))
