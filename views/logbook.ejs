@@ -8,9 +8,7 @@
         <div class="container">
             <div class="wrapper <%= theme %>">
                 <div class="mainbar">
-                    <div>
-                        <p><%= name %> <%= surname %></p>
-                    </div>
+                    <p><%= fullName %></p>
                     <select id="services">
                         <% services.forEach(act => { %>
                             <option value=<%= act.ID %>><%= act.service %></option> <!-- aggiungere periodi -->
