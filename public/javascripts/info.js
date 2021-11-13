@@ -32,7 +32,7 @@ $('.wrapper').on('change', '#activities', function() {
             if (res.status == 200) {
                 let template = `
                     <div id="yearinfo">
-                        ${res.companion == null ? '' : '<p><span>Accompagnatore : </span><%= companion %></p>'}
+                        <p><span>Accompagnatore : </span><%= companion %></p>
                         ${res.team == null ? '' : '<p><span>Squadra : </span><%= team %></p>'}
                         ${res.leader == null ? '' : '<p><span>Caposquadra : </span><%= leader %></p>'}
                         <div class="searchbox">

@@ -40,8 +40,8 @@ router.get('/searchUser', async (req, res, next) => {
 
 router.get('/getInfoByUser', async (req, res, next) => {
   let obj = {}, days = []
-  await doQuery('SELECT accompagnatore FROM partecipanti WHERE UID = ?', [req.session.UID]).then(rs => {
-    obj.companion = rs.accompagnatore || "Nessuno"
+  await doQuery('SELECT accompagnatore FROM partecipanti WHERE UID = ? AND anno = ?', [req.session.UID, req.query.ID]).then(rs => {
+    obj.companion = rs.accompagnatore == null ? "Nessuno" : rs.accompagnatore
   }).catch(() => obj.companion = null)
   if (req.query.isGrest == 'true') {
     await doQuery(`SELECT squadre.nome AS squadra, utenti.nome, utenti.cognome FROM squadre, utenti WHERE squadre.ID = (SELECT squadra FROM ${obj.companion == null ? 'lavoratori' : 'partecipanti'} WHERE UID = ? AND anno = ?) AND utenti.UID = squadre.capo`, [req.session.UID, req.query.ID]).then(rs => {
@@ -56,7 +56,6 @@ router.get('/getInfoByUser', async (req, res, next) => {
     obj.begin = rs.inizio
     obj.end = rs.fine 
   }).catch(() => obj.status = 404)
-  console.log(`SELECT *, DATE_FORMAT(pdata, "%d/%m/%Y") as data FROM programma INNER JOIN giorni ON pdata BETWEEN '${obj.begin}' AND '${obj.end}' AND pdata = gdata AND UID = ?`)
   await doQuery(`SELECT *, DATE_FORMAT(pdata, "%d/%m/%Y") as data FROM programma INNER JOIN giorni ON pdata BETWEEN '${obj.begin}' AND '${obj.end}' AND pdata = gdata AND UID = ?`, [req.session.UID], true).then(rs => {
     rs.forEach(d => {
       days.push({
@@ -71,7 +70,6 @@ router.get('/getInfoByUser', async (req, res, next) => {
     obj.status = 200
   }).catch(() => obj.status = 404)
   obj.days = days
-  console.log(obj)
   if (obj.status == 200) res.json(obj)
   else res.json({status: 404})
 })

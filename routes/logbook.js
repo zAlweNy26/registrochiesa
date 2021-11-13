@@ -23,7 +23,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/logout', (req, res, next) => {
   //req.session.destroy()
-  
+  req.session.logged = false
+  req.session.UID = null
+  req.session.role = null
   res.redirect('/login')
 })
 

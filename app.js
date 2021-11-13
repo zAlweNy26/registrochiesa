@@ -8,6 +8,7 @@ const crypto = require('crypto')
 const sassMiddleware = require('node-sass-middleware')
 const compression = require('compression')
 const helmet = require('helmet')
+const cors = require("cors")
 
 const infoRouter = require('./routes/info')
 const loginRouter = require('./routes/login')
@@ -26,6 +27,7 @@ var genSecret = crypto.createHash("sha256").update(Date.now().toString()).digest
 // https://medium.com/@nodepractices/were-under-attack-23-node-js-security-best-practices-e33c146cb87d
 
 app.use(logger('dev'))
+app.use(cors())
 app.use(helmet({
   contentSecurityPolicy: {
       directives: {
@@ -51,7 +53,7 @@ app.use(session({
   name: 'registroChiesa',
 	secret: genSecret, // assicurarsi che si generi periodicamente
 	resave: false,
-	saveUninitialized: true,
+	saveUninitialized: false,
   cookie: { secure: 'auto' }
 }))
 app.use(express.json())

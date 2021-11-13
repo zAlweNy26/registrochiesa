@@ -151,64 +151,6 @@ select {
     }
 }
 
-table {
-    border-spacing: 1; 
-    border-collapse: collapse; 
-    background: transparent;
-    border-radius: 20px;
-    overflow: hidden;
-    width: 100%;
-    
-    td, th { text-align: center; }
-  
-    thead tr {
-        height: 30px;
-        color: $dark;
-        background-image: linear-gradient(to right, $secondary, $primary);
-        background-attachment: fixed;
-    }
-    
-    tbody tr { 
-        height: 30px; 
-        border-bottom: 1px solid var(--contrast);
-
-        &:last-child { border: 0; }
-    }
-}
-
 @media screen and (max-width: 767px) {
     #infos { flex-direction: column; }
-
-    table { 
-        border: 2px solid var(--contrast);
-        display: block;
-        padding: 5px;
-        position: relative;
-
-        * { position: relative; }
-
-        > *, tr, td, th { display: block; }
-      
-        thead { display: none; }
-
-        tbody tr { 
-            height: auto;
-
-            td { 
-                text-align: end;
-                right: 10px;
-                
-                &:last-child { margin-bottom: 0; }
-
-                &:before { 
-                    content: attr(data-th)" : ";
-                    position: absolute;
-                    font-weight: bold;
-                    width: 45%;
-                    left: 10px;
-                    top: 0;
-                }
-            }        
-        }
-    }
 }
