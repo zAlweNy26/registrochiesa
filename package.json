@@ -15,20 +15,20 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
-    "cookie-session": "^1.4.0",
+    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
-    "debug": "~4.3.2",
+    "debug": "~4.3.4",
     "ejs": "~3.1.6",
-    "express": "~4.17.1",
+    "express": "~4.17.3",
     "express-session": "^1.17.2",
-    "helmet": "^4.6.0",
-    "http-errors": "~1.8.0",
+    "helmet": "^5.0.2",
+    "http-errors": "~2.0.0",
     "morgan": "~1.10.0",
     "mysql": "^2.18.1",
-    "node-sass-middleware": "^0.11.0"
+    "node-sass-middleware": "^1.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14",
-    "snyk": "^1.746.0"
+    "nodemon": "^2.0.15",
+    "snyk": "^1.884.0"
   }
 }
