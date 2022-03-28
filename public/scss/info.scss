@@ -16,8 +16,9 @@
     }
 }
 
-#program i, #reason i { 
-    font-size: $normal;
+#program svg, #reason svg { 
+    width: 16px;
+    height: auto;
     color: var(--contrast); 
 }
 
@@ -99,13 +100,17 @@ select {
         align-items: center;
         justify-content: space-around;
         flex-flow: row wrap;
-        margin-bottom: 10px;
+        gap: 10px;
 
         .searchbox { 
             width: 160px; 
 
             input { padding-right: 10px; }
         }
+    }
+
+    #yearinfo {
+        margin: 10px 0;
     }
 
     #kid { flex: 1; }
